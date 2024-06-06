@@ -1,0 +1,137 @@
+name: "juntoseguros"
+services:
+  elasticsearch:
+    build:
+      context: Elastic/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    image: elasticsearch
+    container_name: elasticsearch
+    volumes:
+      - type: bind
+        source: ./Elastic/config/elasticsearch.yml
+        target: /usr/share/Elastic/config/elasticsearch.yml
+        read_only: true
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/Elastic/data
+    ports:
+      - "${ELASTIC_PORT}:9200"
+    environment:
+      HTTP_HOST: ${HTTP_HOST}
+      NETWORK_HOST: ${NETWORK_HOST}
+      NODE_SCALE: ${NODE_SCALE}
+      CLUSTER_NAME: ${CLUSTER_NAME}
+      discovery.type: ${NODE_SCALE}
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    mem_limit: ${MEM_LIMIT}
+    networks:
+      - js_env
+
+  kibana:
+    build:
+      context: Kibana/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    image: kibana
+    container_name: kibana
+    volumes:
+      - type: bind
+        source: ./Kibana/config/kibana.yml
+        target: /usr/share/Kibana/config/kibana.yml
+        read_only: true
+    environment:
+      KIBANA_SERVER_NAME: kibana
+      SERVER_HOST: ${KIBANA_SERVER_HOST}
+      ELASTIC_SERVER: http://elasticsearch:${ELASTIC_PORT}
+    ports:
+      - "${KIBANA_PORT}:5601"
+    mem_limit: ${MEM_LIMIT}
+    depends_on:
+      - elasticsearch
+    networks:
+      - js_env
+
+  logstash:
+    build:
+      context: Logstash/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    image: logstash
+    container_name: logstash
+    volumes:
+      - type: bind
+        source: ./Logstash/config/logstash.yml
+        target: /usr/share/Logstash/config/logstash.yml
+        read_only: true
+      - type: bind
+        source: ./Logstash/pipeline
+        target: /usr/share/Logstash/pipeline
+        read_only: true
+    command: logstash -f /usr/share/Logstash/pipeline/logstash.conf  
+    ports:
+      - "${LOGSTASH_PORT}:5044"
+    environment:
+      ELASTIC_SERVER: "http://elasticsearch:${ELASTIC_PORT}"
+
+    depends_on:
+      - elasticsearch
+    networks:
+      - js_env
+
+  jaeger:
+    build:
+      context: Jaeger/
+    image: jaeger-tracing
+    container_name: jaeger
+    ports:
+     - "${JAEGER_PORT}:16686"
+    networks:
+      - js_env
+
+  otelcollector:
+    build:
+      context: OTELCollector/
+    image: otel-collector
+    container_name: otelcollector
+    volumes:
+      - type: bind
+        source: ./OTELCollector/config/otel-collector.yml
+        target: /usr/share/OTELCollector/config/otel-collector.yml
+        read_only: true
+    command: [ "--config=/usr/share/OTELCollector/config/otel-collector.yml" ]
+    ports:
+     - "${OTELCOLLECTOR_GRPC_PORT}:4317"
+     - "${OTELCOLLECTOR_HTTP_PORT}:4318"
+    depends_on:
+     - jaeger
+    networks:
+      - js_env
+
+  # filebeat:
+  #   image: docker.elastic.co/beats/filebeat:8.14.0
+  #   container_name: filebeat
+  #   volumes:
+  #     - type: bind
+  #       source: ./Filebeat/filebeat.yml
+  #       target: /usr/share/Filebeat/filebeat.yml
+  #       read_only: true
+  #     - type: bind
+  #       source: ./Filebeat/test.log
+  #       target: /usr/share/Filebeat/test.log
+  #       read_only: true
+  #   # command: filebeat -e -c /usr/share/Filebeat/filebeat.yml
+  #   environment:
+  #     ELASTICSEARCH_HOSTS: http://elasticsearch:${ELASTIC_PORT}
+  #   depends_on:
+  #     - logstash
+  #   networks:
+  #     - juntoseguros
+
+volumes:
+  elasticsearch:
+    name: elasticsearch
+
+networks:
+  js_env:
+    driver: bridge

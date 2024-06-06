@@ -1,0 +1,159 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Onboarding.Api", "JuntoSeguros\JuntoSeguros.Onboarding.Api.csproj", "{B52E8327-3100-41C7-B646-17B9683D3C2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{6A87AC8B-73CF-4B11-813F-5CA077C38A33}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\.env = Docker\.env
+		Docker\docker-compose.yml = Docker\docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logstash", "Logstash", "{DDC8AAC4-1A48-4749-9D03-64FEE0B95688}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\Logstash\Dockerfile = Docker\Logstash\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kibana", "Kibana", "{434EA7FD-BC21-41CD-8998-97912645C366}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\Kibana\Dockerfile = Docker\Kibana\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elastic", "Elastic", "{38DF522C-3405-44F4-816C-9A7B94A6AA4A}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\Elastic\Dockerfile = Docker\Elastic\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{16C26F47-C0D4-4C45-846E-9A5E94E5D278}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\Elastic\config\elasticsearch.yml = Docker\Elastic\config\elasticsearch.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{E067DF3B-D836-4EF3-8FFB-B34F6A696BFA}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\Kibana\config\kibana.yml = Docker\Kibana\config\kibana.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{BF3195B1-613E-40CA-B321-05AFE70085A2}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\Logstash\config\logstash.yml = Docker\Logstash\config\logstash.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipeline", "pipeline", "{B5CA2706-D907-4F83-8E4F-60F262C54D0C}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\Logstash\pipeline\logstash.conf = Docker\Logstash\pipeline\logstash.conf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Filebeat", "Filebeat", "{023BA0C6-6127-4145-A1FC-CE4CA174F5C2}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\Filebeat\filebeat.yml = Docker\Filebeat\filebeat.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Enterprise.Library", "JuntoSeguros.Enterprise.Library\JuntoSeguros.Enterprise.Library.csproj", "{76F6EADE-82B2-44F4-98FC-F64979CBE249}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commom", "Commom", "{FB98C67F-0572-481A-AE3E-510D298F3DD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jaeger", "Jaeger", "{DA7ECC65-F017-4EEA-B431-185152F420AC}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\Jaeger\Dockerfile = Docker\Jaeger\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OTELCollector", "OTELCollector", "{6112A377-2F2B-4763-88F1-894DE43D627F}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\OTELCollector\Dockerfile = Docker\OTELCollector\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{8ED43B2A-3FA3-429E-BC29-0A30C931A239}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\OTELCollector\config\otel-collector.yml = Docker\OTELCollector\config\otel-collector.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Domain", "JuntoSeguros.Core.Domain\JuntoSeguros.Domain.csproj", "{3FFAA26B-1D3C-44B2-B62E-7C6C45D27099}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{74492F5A-A3E5-46B9-B5C3-860862681A5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Application", "JuntoSeguros.Application\JuntoSeguros.Application.csproj", "{D8BA1B75-D554-4A85-B8B0-276D1D58C847}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Domain.Core", "JuntoSeguros.Domain.Core\JuntoSeguros.Domain.Core.csproj", "{3B141A0E-8285-40B7-80F6-6429270F6C4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InternalAPI", "InternalAPI", "{BE74370A-35B7-4C30-89E6-244200E7C9B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Insurer.Api", "JuntoSeguros.Insurer\JuntoSeguros.Insurer.Api.csproj", "{E429EF6E-E206-40FF-B22D-AB0CDDC0F1BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalAPI", "ExternalAPI", "{CCC3E262-AE8A-4254-9DCF-02A279E4B579}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{2CD23010-932B-4CAD-A867-5D4B6D6CEE05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Infra", "JuntoSeguros.Infra\JuntoSeguros.Infra.csproj", "{CB347D88-94C7-4341-AAFE-82C64E7764EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Infra.IoC", "JuntoSeguros.Infra.IoC\JuntoSeguros.Infra.IoC.csproj", "{F9DC2511-BCEB-4329-955F-0FA85AEA284D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B52E8327-3100-41C7-B646-17B9683D3C2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B52E8327-3100-41C7-B646-17B9683D3C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B52E8327-3100-41C7-B646-17B9683D3C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B52E8327-3100-41C7-B646-17B9683D3C2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76F6EADE-82B2-44F4-98FC-F64979CBE249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76F6EADE-82B2-44F4-98FC-F64979CBE249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76F6EADE-82B2-44F4-98FC-F64979CBE249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76F6EADE-82B2-44F4-98FC-F64979CBE249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FFAA26B-1D3C-44B2-B62E-7C6C45D27099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FFAA26B-1D3C-44B2-B62E-7C6C45D27099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FFAA26B-1D3C-44B2-B62E-7C6C45D27099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FFAA26B-1D3C-44B2-B62E-7C6C45D27099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8BA1B75-D554-4A85-B8B0-276D1D58C847}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8BA1B75-D554-4A85-B8B0-276D1D58C847}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8BA1B75-D554-4A85-B8B0-276D1D58C847}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8BA1B75-D554-4A85-B8B0-276D1D58C847}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B141A0E-8285-40B7-80F6-6429270F6C4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B141A0E-8285-40B7-80F6-6429270F6C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B141A0E-8285-40B7-80F6-6429270F6C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B141A0E-8285-40B7-80F6-6429270F6C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E429EF6E-E206-40FF-B22D-AB0CDDC0F1BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E429EF6E-E206-40FF-B22D-AB0CDDC0F1BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E429EF6E-E206-40FF-B22D-AB0CDDC0F1BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E429EF6E-E206-40FF-B22D-AB0CDDC0F1BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB347D88-94C7-4341-AAFE-82C64E7764EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB347D88-94C7-4341-AAFE-82C64E7764EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB347D88-94C7-4341-AAFE-82C64E7764EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB347D88-94C7-4341-AAFE-82C64E7764EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9DC2511-BCEB-4329-955F-0FA85AEA284D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9DC2511-BCEB-4329-955F-0FA85AEA284D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9DC2511-BCEB-4329-955F-0FA85AEA284D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9DC2511-BCEB-4329-955F-0FA85AEA284D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B52E8327-3100-41C7-B646-17B9683D3C2A} = {BE74370A-35B7-4C30-89E6-244200E7C9B9}
+		{DDC8AAC4-1A48-4749-9D03-64FEE0B95688} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
+		{434EA7FD-BC21-41CD-8998-97912645C366} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
+		{38DF522C-3405-44F4-816C-9A7B94A6AA4A} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
+		{16C26F47-C0D4-4C45-846E-9A5E94E5D278} = {38DF522C-3405-44F4-816C-9A7B94A6AA4A}
+		{E067DF3B-D836-4EF3-8FFB-B34F6A696BFA} = {434EA7FD-BC21-41CD-8998-97912645C366}
+		{BF3195B1-613E-40CA-B321-05AFE70085A2} = {DDC8AAC4-1A48-4749-9D03-64FEE0B95688}
+		{B5CA2706-D907-4F83-8E4F-60F262C54D0C} = {DDC8AAC4-1A48-4749-9D03-64FEE0B95688}
+		{023BA0C6-6127-4145-A1FC-CE4CA174F5C2} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
+		{76F6EADE-82B2-44F4-98FC-F64979CBE249} = {FB98C67F-0572-481A-AE3E-510D298F3DD3}
+		{DA7ECC65-F017-4EEA-B431-185152F420AC} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
+		{6112A377-2F2B-4763-88F1-894DE43D627F} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
+		{8ED43B2A-3FA3-429E-BC29-0A30C931A239} = {6112A377-2F2B-4763-88F1-894DE43D627F}
+		{3FFAA26B-1D3C-44B2-B62E-7C6C45D27099} = {74492F5A-A3E5-46B9-B5C3-860862681A5D}
+		{D8BA1B75-D554-4A85-B8B0-276D1D58C847} = {74492F5A-A3E5-46B9-B5C3-860862681A5D}
+		{3B141A0E-8285-40B7-80F6-6429270F6C4A} = {74492F5A-A3E5-46B9-B5C3-860862681A5D}
+		{E429EF6E-E206-40FF-B22D-AB0CDDC0F1BD} = {BE74370A-35B7-4C30-89E6-244200E7C9B9}
+		{CB347D88-94C7-4341-AAFE-82C64E7764EE} = {2CD23010-932B-4CAD-A867-5D4B6D6CEE05}
+		{F9DC2511-BCEB-4329-955F-0FA85AEA284D} = {2CD23010-932B-4CAD-A867-5D4B6D6CEE05}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0447C4E-0E7F-41B7-8C09-939E97EDC0C4}
+	EndGlobalSection
+EndGlobal
