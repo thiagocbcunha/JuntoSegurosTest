@@ -1,4 +1,4 @@
-﻿using JuntoSeguros.Domain.Entities;
+﻿using JuntoSeguros.Domain.Entities.PersonEntity;
 
 namespace JuntoSeguros.Domain.Contracts;
 

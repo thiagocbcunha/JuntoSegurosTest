@@ -1,4 +1,4 @@
-﻿namespace JuntoSeguros.Domain.Entities;
+﻿namespace JuntoSeguros.Domain.Entities.PersonEntity;
 
 public class Person : Entity<Guid>
 {

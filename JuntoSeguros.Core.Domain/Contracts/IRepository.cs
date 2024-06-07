@@ -1,4 +1,6 @@
-﻿namespace JuntoSeguros.Domain.Contracts;
+﻿using JuntoSeguros.Domain.Entities;
+
+namespace JuntoSeguros.Domain.Contracts;
 
 public interface IRepository<TEntity, in TType>
     where TEntity : Entity<TType>

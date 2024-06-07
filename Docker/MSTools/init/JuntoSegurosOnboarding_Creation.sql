@@ -1,15 +1,11 @@
 USE [master]
 GO
-/****** Object:  Database [JuntoSegurosOnboarding2]    Script Date: 07/06/2024 11:02:39 ******/
+/****** Object:  Database [JuntoSegurosOnboarding]    Script Date: 07/06/2024 18:05:37 ******/
 CREATE DATABASE [JuntoSegurosOnboarding]
-GO
 
+GO
 USE [JuntoSegurosOnboarding]
-GO
-/****** Object:  Table [dbo].[Gender]    Script Date: 07/06/2024 11:02:40 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TABLE [dbo].[Gender](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -23,7 +19,7 @@ CREATE TABLE [dbo].[Gender](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Person]    Script Date: 07/06/2024 11:02:40 ******/
+/****** Object:  Table [dbo].[Person]    Script Date: 07/06/2024 18:05:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -38,7 +34,7 @@ CREATE TABLE [dbo].[Person](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PersonAccess]    Script Date: 07/06/2024 11:02:40 ******/
+/****** Object:  Table [dbo].[PersonAccess]    Script Date: 07/06/2024 18:05:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -46,32 +42,32 @@ GO
 CREATE TABLE [dbo].[PersonAccess](
 	[PersonId] [uniqueidentifier] NOT NULL,
 	[UserName] [varchar](50) NOT NULL,
-	[Actived] [bit] NOT NULL,
  CONSTRAINT [PK_PersonAccess] PRIMARY KEY CLUSTERED 
 (
 	[PersonId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PersonAccessPassword]    Script Date: 07/06/2024 11:02:40 ******/
+/****** Object:  Table [dbo].[PersonAccessEvent]    Script Date: 07/06/2024 18:05:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[PersonAccessPassword](
+CREATE TABLE [dbo].[PersonAccessEvent](
 	[PersonId] [uniqueidentifier] NOT NULL,
 	[VersionNum] [int] NOT NULL,
+	[Actived] [bit] NOT NULL,
 	[EncryptedPass] [varchar](1000) NOT NULL,
 	[CreateBy] [varchar](50) NOT NULL,
 	[CreateDate] [date] NOT NULL,
- CONSTRAINT [PK_PersonAccessPassword] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_PersonAccessEvent] PRIMARY KEY CLUSTERED 
 (
 	[PersonId] ASC,
 	[VersionNum] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PersonAccessRegister]    Script Date: 07/06/2024 11:02:40 ******/
+/****** Object:  Table [dbo].[PersonAccessRegister]    Script Date: 07/06/2024 18:05:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -87,7 +83,7 @@ CREATE TABLE [dbo].[PersonAccessRegister](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PersonEvent]    Script Date: 07/06/2024 11:02:40 ******/
+/****** Object:  Table [dbo].[PersonEvent]    Script Date: 07/06/2024 18:05:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -105,7 +101,7 @@ CREATE TABLE [dbo].[PersonEvent](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Phone]    Script Date: 07/06/2024 11:02:40 ******/
+/****** Object:  Table [dbo].[Phone]    Script Date: 07/06/2024 18:05:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -120,7 +116,7 @@ CREATE TABLE [dbo].[Phone](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PhonePerson]    Script Date: 07/06/2024 11:02:40 ******/
+/****** Object:  Table [dbo].[PhonePerson]    Script Date: 07/06/2024 18:05:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -135,7 +131,7 @@ CREATE TABLE [dbo].[PhonePerson](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PhonePersonEvent]    Script Date: 07/06/2024 11:02:40 ******/
+/****** Object:  Table [dbo].[PhonePersonEvent]    Script Date: 07/06/2024 18:05:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -154,7 +150,7 @@ CREATE TABLE [dbo].[PhonePersonEvent](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PhoneType]    Script Date: 07/06/2024 11:02:40 ******/
+/****** Object:  Table [dbo].[PhoneType]    Script Date: 07/06/2024 18:05:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -177,10 +173,10 @@ REFERENCES [dbo].[Person] ([Id])
 GO
 ALTER TABLE [dbo].[PersonAccess] CHECK CONSTRAINT [FK_PersonAccess_Person]
 GO
-ALTER TABLE [dbo].[PersonAccessPassword]  WITH CHECK ADD  CONSTRAINT [FK_PersonAccessPassword_Person] FOREIGN KEY([PersonId])
+ALTER TABLE [dbo].[PersonAccessEvent]  WITH CHECK ADD  CONSTRAINT [FK_PersonAccessEvent_Person] FOREIGN KEY([PersonId])
 REFERENCES [dbo].[Person] ([Id])
 GO
-ALTER TABLE [dbo].[PersonAccessPassword] CHECK CONSTRAINT [FK_PersonAccessPassword_Person]
+ALTER TABLE [dbo].[PersonAccessEvent] CHECK CONSTRAINT [FK_PersonAccessEvent_Person]
 GO
 ALTER TABLE [dbo].[PersonAccessRegister]  WITH CHECK ADD  CONSTRAINT [FK_PersonAccessRegister_Person] FOREIGN KEY([PersonId])
 REFERENCES [dbo].[Person] ([Id])

@@ -1,4 +1,4 @@
-﻿namespace JuntoSeguros.Domain;
+﻿namespace JuntoSeguros.Domain.Entities;
 
 public class Entity<TType>
 {

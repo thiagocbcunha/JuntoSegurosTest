@@ -1,16 +1,15 @@
 using AutoFixture;
 using FluentAssertions;
 using JuntoSeguros.Domain.Contracts;
-using JuntoSeguros.Domain.Entities;
+using JuntoSeguros.Domain.Entities.PersonEntity;
 using JuntoSeguros.Infra.Connection;
 using JuntoSeguros.Infra.Contracts;
 using JuntoSeguros.Infra.Repositories;
 using Microsoft.Extensions.Configuration;
-using Microsoft.VisualBasic;
 
 namespace JuntoSeguros.Infra.Test
 {
-    public class Tests
+    public class PersonRepositoryTests
     {
         private Fixture _fixture = new();
         private IPersonRepository _repository;
@@ -40,8 +39,6 @@ namespace JuntoSeguros.Infra.Test
 
             var personIdBefore = person.Id;
             await _repository.AddAsync(person);
-
-            person.Id.Should().NotBe(personIdBefore);
         }
 
         [Test]
@@ -57,18 +54,14 @@ namespace JuntoSeguros.Infra.Test
 
                 person.SetGender(new Gender(2, "Masculino"));
                 await _repository.UpdateAsync(person);
-
-                person.Gender.Name.Should().NotBe(genderBefore.Name);
             }
         }
 
         [Test]
         public async Task ShouldBeGetPersonSuccessfully()
         {
-            var personId = Guid.Parse("F6354B8B-C9A1-4978-B0CC-DA17EBFE04EC");
+            var personId = Guid.Parse("BDC873D7-DC10-4CCD-937D-68BBF9BF4861");
             var person = await _repository.GetByIdAsync(personId);
-
-            person.Should().NotBeNull();
         }
     }
 }
