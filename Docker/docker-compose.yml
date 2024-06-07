@@ -71,6 +71,7 @@ services:
     command: logstash -f /usr/share/Logstash/pipeline/logstash.conf  
     ports:
       - "${LOGSTASH_PORT}:5044"
+    mem_limit: ${MEM_LIMIT}
     environment:
       ELASTIC_SERVER: "http://elasticsearch:${ELASTIC_PORT}"
 
@@ -103,11 +104,74 @@ services:
     ports:
      - "${OTELCOLLECTOR_GRPC_PORT}:4317"
      - "${OTELCOLLECTOR_HTTP_PORT}:4318"
+    mem_limit: ${MEM_LIMIT}
     depends_on:
      - jaeger
     networks:
       - js_env
+  
+  mssqlserver:
+    container_name: mssqlserver
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_PID: 'Developer' 
+      MSSQL_SA_PASSWORD: '${SQLSERVER_SA_PASSWORD}'
+    ports: 
+      - "${SQLSERVER_PORT}:1433"
+    volumes:
+      - ./SQLServer/log:/var/opt/mssql/log
+      - ./SQLServer/data:/var/opt/mssql/data
+      - ./SQLServer/secrets:/var/opt/mssql/secrets
+    networks:
+      - js_env
+  
+  mssqltools:
+    container_name: mssqltools
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      - mssqlserver
+    volumes:
+      - ./MSTools/init/JuntoSegurosOnboarding_Creation.sql:/tmp/JuntoSegurosOnboarding_Creation.sql
+      - ./MSTools/init/JuntoSegurosOnboarding_Insertions.sql:/tmp/JuntoSegurosOnboarding_Insertions.sql
+      - ./MSTools/init/init-juntoseguros_onboarding.sh:/tmp/init-juntoseguros_onboarding.sh
+    command: /bin/bash ./tmp/init-juntoseguros_onboarding.sh
+    networks:
+      - js_env
+  
+  redis:
+    build:
+      context: Redis/
+    image: redis
+    container_name: redis
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    ports:
+      - "${REDIS_PORT}:6379"
+    mem_limit: ${MEM_LIMIT}
+    networks:
+      - js_env
 
+  mongo:
+    build:
+      context: Mongo/
+    image: mongo
+    container_name: mongo
+    volumes:
+      - type: bind
+        source: ./Mongo/config/mongo.yml
+        target: /usr/share/Mongo/config/mongo.yml
+        read_only: true
+      - type: volume
+        source: mongo
+        target: /usr/share/Mongo/data/db
+    environment:
+      MONGO_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    ports:
+      - "${MONGO_PORT}:27017"
+    mem_limit: ${MEM_LIMIT}
+    networks:
+      - js_env
   # filebeat:
   #   image: docker.elastic.co/beats/filebeat:8.14.0
   #   container_name: filebeat
@@ -131,6 +195,8 @@ services:
 volumes:
   elasticsearch:
     name: elasticsearch
+  mongo:
+    name: mongo
 
 networks:
   js_env:

@@ -1,0 +1,1 @@
+sleep 60 && /opt/mssql-tools/bin/sqlcmd -S mssqlserver -U sa -P SqlServer2022! -d master -i /tmp/JuntoSegurosOnboarding_Creation.sql && /opt/mssql-tools/bin/sqlcmd -S mssqlserver -U sa -P SqlServer2022! -d master -i /tmp/JuntoSegurosOnboarding_Insertions.sql

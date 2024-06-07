@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JuntoSeguros.Enterprise.Library\JuntoSeguros.Enterprise.Library.csproj" />
+    <ProjectReference Include="..\JuntoSeguros.Infra.IoC\JuntoSeguros.Infra.IoC.csproj" />
   </ItemGroup>
 
 </Project>
