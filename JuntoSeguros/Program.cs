@@ -1,6 +1,5 @@
 using JuntoSeguros.Enterprise.Library.Logging.Extensions;
 using JuntoSeguros.Enterprise.Library.Tracing.Extensions;
-using JuntoSeguros.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +13,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddDataBase(builder.Configuration);
 
 builder.Logging.ConfigureEnterpriceLog(builder.Configuration, "ApplicationName");
 

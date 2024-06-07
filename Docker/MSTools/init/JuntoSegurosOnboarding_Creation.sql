@@ -29,7 +29,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Person](
-	[Id] [uniqueidentifier] NOT NULL,
+	[Id] [uniqueidentifier] DEFAULT (NEWID()) NOT NULL,
 	[Name] [varchar](200) NOT NULL,
 	[BirthDate] [date] NOT NULL,
  CONSTRAINT [PK_Person] PRIMARY KEY CLUSTERED 
@@ -126,7 +126,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[PhonePerson](
-	[Id] [uniqueidentifier] NOT NULL,
+	[Id] [uniqueidentifier] DEFAULT (NEWID()) NOT NULL,
 	[PersonId] [uniqueidentifier] NOT NULL,
 	[PhoneId] [int] NOT NULL,
  CONSTRAINT [PK_PhonePerson] PRIMARY KEY CLUSTERED 

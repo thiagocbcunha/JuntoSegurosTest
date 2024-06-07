@@ -1,9 +1,9 @@
 ﻿namespace JuntoSeguros.Domain.Entities;
 
-public class Person
+public class Person : Entity<Guid>
 {
-    public Guid Id { get; }
-    public string Name { get; }
-    public DateTime BirthDate { get; }
-    public virtual Gender Gender { get; }
+    public string Name { get; init; }
+    public DateTime BirthDate { get; init; }
+    public Gender Gender { get; private set; }
+    public void SetGender(Gender gender) => Gender = gender;
 }
