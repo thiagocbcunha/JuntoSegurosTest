@@ -45,9 +45,9 @@ public abstract class BaseRepositoryTest
 
     public PersonAccess GetPersonAccess(Guid personId)
     {
-        var userName = _fixture.Create<string>();
+        var Email = _fixture.Create<string>();
         var password = _fixture.Create<string>();
-        var personAccess = new PersonAccess(userName, new PersonAccessEvent(true, password, DateTime.Now.AddDays(-50)));
+        var personAccess = new PersonAccess(Email, new PersonAccessEvent(true, password, DateTime.Now.AddDays(-50)));
         
         personAccess.Enable();
         personAccess.SetId(personId);

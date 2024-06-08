@@ -10,21 +10,40 @@ namespace JuntoSeguros.Onboarding.Query.API.Controllers
     [Route("[controller]")]
     public class PersonController(ILogger<PersonController> logger, IActivityFactory activityFactory, IMediator mediator) : ControllerBase
     {
-        [HttpGet(Name = "GetAll")]
-        public async Task<IEnumerable<PersonDto>> GetAll()
+        [HttpGet]
+        public async Task<IEnumerable<PersonDto>> Get()
         {
-            var activity = activityFactory.Start("GetInt");
-
-            activity.Tag?.SetTag("Get", "Executing");
-
-            logger.LogInformation(message: "Executing Get");
+            var activity = activityFactory.Start($"GetAll");
+            activity.Tag?.SetTag("MathodName", "Get");
+            logger.LogInformation(message: $"Executing: Person method:GetAll"); ;
 
             var result = await mediator.Send(new GetAllPersonCommand());
 
-            logger.LogInformation(message: "Executed Get");
+            return result;
+        }
 
-            if (activity is not null)
-                activity.Dispose();
+        [HttpGet("{id}")]
+        public async Task<PersonDto?> Get(Guid id)
+        {
+            var activity = activityFactory.Start($"GetById");
+            activity.Tag?.SetTag("MathodName", "Get");
+            activity.Tag?.SetTag("Paramenter", id);
+            logger.LogInformation(message: $"Executing: Person method:GetById");
+
+            var result = await mediator.Send(new GetPersonByIdCommand(id));
+
+            return result;
+        }
+
+        [HttpGet("/document/{document}")]
+        public async Task<PersonDto?> Get(string document)
+        {
+            var activity = activityFactory.Start($"GetByDocument");
+            activity.Tag?.SetTag("MathodName", "Get");
+            activity.Tag?.SetTag("Paramenter", document);
+            logger.LogInformation(message: $"Executing: Person method:GetById");
+
+            var result = await mediator.Send(new GetPersonByDocumentCommand(document));
 
             return result;
         }

@@ -35,7 +35,7 @@ namespace JuntoSeguros.Infra.IntegrationTest
             var personAccessDb = await _personAccessRepository.GetByIdAsync(personAccess.PersonId);
 
             personAccess.Id.Should().Be(personAccessDb.Id);
-            personAccess.UserName.Should().Be(personAccessDb.UserName);
+            personAccess.Email.Should().Be(personAccessDb.Email);
         }
     }
 }

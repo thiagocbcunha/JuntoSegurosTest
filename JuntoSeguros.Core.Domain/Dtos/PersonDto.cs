@@ -7,6 +7,7 @@ public class PersonDto : MongoEntity
     public string Name { get; set; }
     public Gender Gender { get; set; }
     public DateTime BirthDate { get; set; }
+    public string DocumentNumber { get; set; }
 
     public static explicit operator Person(PersonDto personDto)
     {
@@ -14,6 +15,7 @@ public class PersonDto : MongoEntity
         {
             Name = personDto.Name,
             BirthDate = personDto.BirthDate,
+            DocumentNumber = personDto.DocumentNumber
         };
 
         person.SetId(personDto.Id);

@@ -10,7 +10,7 @@ public class PersonAccessRepository(IConnectionFactory connectionFactory) : IPer
 {
     public async Task AddAsync(PersonAccess personAccess)
     {
-        string sqlPerson = "INSERT INTO[dbo].[PersonAccess] ([PersonId], [UserName]) OUTPUT INSERTED.PersonId VALUES (@PersonId, @UserName);";
+        string sqlPerson = "INSERT INTO[dbo].[PersonAccess] ([PersonId], [Email]) OUTPUT INSERTED.PersonId VALUES (@PersonId, @Email);";
 
         using (var connection = connectionFactory.Connection())
         {
@@ -36,7 +36,7 @@ public class PersonAccessRepository(IConnectionFactory connectionFactory) : IPer
 
             if (row is not null)
             {
-                var result = new PersonAccess(row.UserName, new PersonAccessEvent(row.Actived, row.EncryptedPass, row.CreateDate));
+                var result = new PersonAccess(row.Email, new PersonAccessEvent(row.Actived, row.EncryptedPass, row.CreateDate));
                 result.SetId(id);
 
                 return result;

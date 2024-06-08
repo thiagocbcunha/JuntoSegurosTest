@@ -1,5 +1,5 @@
 ﻿namespace JuntoSeguros.Application.Command.PersonAccessCommands;
 
-public class DisableUserCommand(Guid personId, string userName, string password, DateTime lastChange, bool actived) : BaseCommand(personId, userName, password, lastChange, actived)
+public class DisableUserCommand(Guid personId, string Email, string password, DateTime lastChange, bool actived) : BaseCommand(personId, Email, password, lastChange, actived)
 {
 }

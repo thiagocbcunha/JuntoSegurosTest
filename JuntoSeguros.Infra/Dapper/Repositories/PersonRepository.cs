@@ -1,8 +1,8 @@
 ﻿using Dapper;
 using System.Data;
-using JuntoSeguros.Domain.Entities.PersonEntity;
-using JuntoSeguros.Infra.Dapper.Contracts;
 using JuntoSeguros.Domain.Contracts;
+using JuntoSeguros.Infra.Dapper.Contracts;
+using JuntoSeguros.Domain.Entities.PersonEntity;
 
 namespace JuntoSeguros.Infra.Dapper.Repositories;
 

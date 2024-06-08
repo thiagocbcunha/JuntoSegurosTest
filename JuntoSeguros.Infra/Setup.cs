@@ -44,7 +44,7 @@ public static class Setup
             {
                 cfg.Host(rabbitConfiguration.Endpoint, "/", c =>
                 {
-                    c.Username(rabbitConfiguration.UserName);
+                    c.Email(rabbitConfiguration.Email);
                     c.Password(rabbitConfiguration.Password);
                 });
 

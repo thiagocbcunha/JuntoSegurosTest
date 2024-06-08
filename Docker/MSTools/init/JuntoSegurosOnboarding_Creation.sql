@@ -27,6 +27,7 @@ GO
 CREATE TABLE [dbo].[Person](
 	[Id] [uniqueidentifier] DEFAULT (NEWID()) NOT NULL,
 	[Name] [varchar](200) NOT NULL,
+	[DocumentNumber] [varchar](12) NOT NULL,
 	[BirthDate] [date] NOT NULL,
  CONSTRAINT [PK_Person] PRIMARY KEY CLUSTERED 
 (
@@ -41,7 +42,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[PersonAccess](
 	[PersonId] [uniqueidentifier] NOT NULL,
-	[UserName] [varchar](50) NOT NULL,
+	[Email] [varchar](50) NOT NULL,
  CONSTRAINT [PK_PersonAccess] PRIMARY KEY CLUSTERED 
 (
 	[PersonId] ASC

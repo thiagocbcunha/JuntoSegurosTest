@@ -3,11 +3,11 @@ using JuntoSeguros.Domain.Exceptions;
 
 namespace JuntoSeguros.Domain.Entities.PersonAccessEntity;
 
-public class PersonAccess(string userName, PersonAccessEvent personAccessEvent) : Entity<Guid>
+public class PersonAccess(string Email, PersonAccessEvent personAccessEvent) : Entity<Guid>
 {
     public Guid PersonId => Id;
     public bool Changed { get; private set; }
-    public string UserName { get; init; } = userName;
+    public string Email { get; init; } = Email;
     public PersonAccessEvent PersonAccessEvent { get; init; } = personAccessEvent;
 
     public void Enable()
@@ -41,7 +41,7 @@ public class PersonAccess(string userName, PersonAccessEvent personAccessEvent) 
         return new PersonAccessDto()
         {
             Id = personAccess.PersonId,
-            UserName = personAccess.UserName,
+            Email = personAccess.Email,
             PersonId = personAccess.PersonId,
             Actived = personAccess.PersonAccessEvent.Actived,
             CreateDate = personAccess.PersonAccessEvent.CreateDate,
