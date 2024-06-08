@@ -1,20 +1,16 @@
 using Moq;
-using JuntoSeguros.Domain.Enums;
+using AutoFixture;
+using FluentAssertions;
+using JuntoSeguros.Domain.Dtos;
 using Microsoft.Extensions.Logging;
-using JuntoSeguros.Domain.Entities.PersonEntity;
+using JuntoSeguros.Domain.Contracts;
+using JuntoSeguros.Domain.Exceptions;
 using JuntoSeguros.Enterprise.Library.Contracts;
-using JuntoSeguros.Application.Command.PersonCommands;
 using JuntoSeguros.Application.Handler.PersonHandlers;
 using JuntoSeguros.Domain.Entities.PersonAccessEntity;
 using JuntoSeguros.Application.Command.PersonAccessCommands;
-using AutoFixture;
-using FluentAssertions;
-using JuntoSeguros.Domain.Exceptions;
-using JuntoSeguros.Enterprise.Library.Security;
-using JuntoSeguros.Domain.Dtos;
-using JuntoSeguros.Domain.Contracts;
 
-namespace JuntoSeguros.Application.Test.PersonHandlers;
+namespace JuntoSeguros.Application.Test.PersonAccessHandlers;
 
 public class ChangePasswordHanlderTest
 {
@@ -46,16 +42,16 @@ public class ChangePasswordHanlderTest
     [Test]
     public async Task ShoudExecuteHandlerSuccessfully()
     {
-        var newPass = _fixture.Create<string>();
-        var oldPass = _fixture.Create<string>();
+        var newPass = "123456789123";
+        var oldPass = "321456987456";
         _enterpriseSecurityMock.Setup(m => m.GetHash(newPass)).Returns(newPass);
         _enterpriseSecurityMock.Setup(m => m.GetHash(oldPass)).Returns(oldPass);
 
-        var changeCommand = new ChangePasswordCommand(Guid.NewGuid(), _fixture.Create<string>(), newPass, oldPass, DateTime.Now.AddDays(-50), true);
+        var changeCommand = new ChangePasswordCommand(Guid.NewGuid(), "teste@teste.com.br", newPass, oldPass, DateTime.Now.AddDays(-50), true);
         await _handler.Handle(changeCommand, new CancellationToken());
 
         _activityFactoryMock.Verify(m => m.Start("ChangePassword-Handler"), Times.Once);
-        _messagingSenderMock.Verify(m => m.Send(It.IsAny<PersonDto>()), Times.Once);
+        _messagingSenderMock.Verify(m => m.Send(It.IsAny<PersonAccessDto>()), Times.Once);
         _enterpriseSecurityMock.Verify(m => m.GetHash(It.IsAny<string>()), Times.Exactly(2));
         _personRepositoryMock.Verify(m => m.UpdateAsync(It.IsAny<PersonAccess>()), Times.Once);
     }

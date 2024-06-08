@@ -1,6 +1,6 @@
-﻿using JuntoSeguros.Enterprise.Library.Contracts;
-using System.Text;
+﻿using System.Text;
 using System.Security.Cryptography;
+using JuntoSeguros.Enterprise.Library.Contracts;
 
 namespace JuntoSeguros.Enterprise.Library.Security;
 

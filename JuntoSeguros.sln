@@ -131,6 +131,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Onboarding.Com
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Onboarding.Query.Api", "JuntoSeguros.Onboarding.Query.API\JuntoSeguros.Onboarding.Query.Api.csproj", "{C6F69617-CDC7-415E-9AD0-B37E74C81DFA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQ", "RabbitMQ", "{5AA3C467-7554-44DF-87CB-AEEB93AFD493}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\RabbitMQ\Dockerfile = Docker\RabbitMQ\Dockerfile
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -210,6 +215,7 @@ Global
 		{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB} = {FF20FD11-75AE-4A62-965E-1B9C3A01B2FB}
 		{CA634357-A756-4716-B59D-4EB54C9579A7} = {BE74370A-35B7-4C30-89E6-244200E7C9B9}
 		{C6F69617-CDC7-415E-9AD0-B37E74C81DFA} = {BE74370A-35B7-4C30-89E6-244200E7C9B9}
+		{5AA3C467-7554-44DF-87CB-AEEB93AFD493} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0447C4E-0E7F-41B7-8C09-939E97EDC0C4}

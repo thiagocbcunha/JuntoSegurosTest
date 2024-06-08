@@ -1,4 +1,5 @@
 using JuntoSeguros.Infra.IoC;
+using JuntoSeguros.Enterprise.Library.Security;
 using JuntoSeguros.Onboarding.Query.Api.Middware;
 using JuntoSeguros.Enterprise.Library.Logging.Extensions;
 using JuntoSeguros.Enterprise.Library.Tracing.Extensions;
@@ -13,6 +14,7 @@ builder.Configuration
 
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddEnterpriseSecurity();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Logging.ConfigureEnterpriceLog(builder.Configuration, "ApplicationName");

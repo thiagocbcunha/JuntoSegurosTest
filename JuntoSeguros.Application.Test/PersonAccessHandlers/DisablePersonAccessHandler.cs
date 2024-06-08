@@ -8,7 +8,7 @@ using JuntoSeguros.Application.Command.PersonAccessCommands;
 using JuntoSeguros.Domain.Dtos;
 using JuntoSeguros.Domain.Contracts;
 
-namespace JuntoSeguros.Application.Test.PersonHandlers;
+namespace JuntoSeguros.Application.Test.PersonAccessHandlers;
 
 public class DisableUserHandlerTest
 {
@@ -43,7 +43,7 @@ public class DisableUserHandlerTest
         await _handler.Handle(changeCommand, new CancellationToken());
 
         _activityFactoryMock.Verify(m => m.Start("DisableUser-Handler"), Times.Once);
-        _messagingSenderMock.Verify(m => m.Send(It.IsAny<PersonDto>()), Times.Once);
+        _messagingSenderMock.Verify(m => m.Send(It.IsAny<PersonAccessDto>()), Times.Once);
         _personRepositoryMock.Verify(m => m.UpdateAsync(It.IsAny<PersonAccess>()), Times.Once);
     }
 }

@@ -10,7 +10,7 @@ public class PersonRepository(IConnectionFactory connectionFactory) : IPersonRep
 {
     public async Task AddAsync(Person person)
     {
-        string sqlPerson = "INSERT INTO[dbo].[Person] ([Name], [BirthDate]) OUTPUT INSERTED.Id VALUES (@Name, @BirthDate);";
+        string sqlPerson = "INSERT INTO[dbo].[Person] ([Name], [DocumentNumber], [BirthDate]) OUTPUT INSERTED.Id VALUES (@Name, @DocumentNumber, @BirthDate);";
 
         using (var connection = connectionFactory.Connection())
         {

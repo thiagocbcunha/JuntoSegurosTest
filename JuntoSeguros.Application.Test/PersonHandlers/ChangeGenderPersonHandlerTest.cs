@@ -1,18 +1,17 @@
 using Moq;
-using FluentAssertions;
+using AutoFixture;
+using JuntoSeguros.Domain.Dtos;
 using JuntoSeguros.Domain.Enums;
+using JuntoSeguros.Domain.Contracts;
 using Microsoft.Extensions.Logging;
 using JuntoSeguros.Domain.Entities.PersonEntity;
 using JuntoSeguros.Enterprise.Library.Contracts;
 using JuntoSeguros.Application.Command.PersonCommands;
 using JuntoSeguros.Application.Handler.PersonHandlers;
-using AutoFixture;
-using JuntoSeguros.Domain.Dtos;
-using JuntoSeguros.Domain.Contracts;
 
-namespace JuntoSeguros.Application.Test;
+namespace JuntoSeguros.Application.Test.PersonHandlers;
 
-public class GenderGenderPersonHandlerTest
+public class ChangeGenderPersonHandlerTest
 {
     Fixture _fixture = new();
     ChangeGenderPersonHandler _handler;

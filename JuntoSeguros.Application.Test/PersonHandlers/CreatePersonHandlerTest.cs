@@ -1,18 +1,17 @@
 using Moq;
-using FluentAssertions;
+using AutoFixture;
+using JuntoSeguros.Domain.Dtos;
 using JuntoSeguros.Domain.Enums;
 using Microsoft.Extensions.Logging;
+using JuntoSeguros.Domain.Contracts;
 using JuntoSeguros.Domain.Entities.PersonEntity;
 using JuntoSeguros.Enterprise.Library.Contracts;
 using JuntoSeguros.Application.Command.PersonCommands;
 using JuntoSeguros.Application.Handler.PersonHandlers;
-using JuntoSeguros.Domain.Dtos;
-using JuntoSeguros.Domain.Contracts;
-using AutoFixture;
 
 namespace JuntoSeguros.Application.Test.PersonHandlers;
 
-public class InsertPersonHandlerTest
+public class CreatePersonHandlerTest
 {
     Fixture _fixture = new();
     Mock<IActivityFactory> _activityFactoryMock = new();

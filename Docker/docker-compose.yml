@@ -165,7 +165,7 @@ services:
         source: mongo
         target: /usr/share/Mongo/data/db
     environment:
-      MONGO_ROOT_Email: ${MONGO_ROOT_Email}
+      MONGO_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
       MONGO_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
     ports:
       - "${MONGO_PORT}:27017"
@@ -184,6 +184,36 @@ services:
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
         - js_env
+
+  # rabbitmq:
+  #   build:
+  #     context: RabbitMQ/
+  #   image: rabbitmq
+  #   container_name: 'rabbitmq'
+  #   ports:
+  #       - ${RABBIT_PORT_1}:5672
+  #       - ${RABBIT_PORT_2}:15672
+  #   volumes:
+  #       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+  #       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+  #   networks:
+  #       - js_env
+  
+  # onboarding.command.api:
+  #   image: onboarding-command-api
+  #   build:
+  #     context: .
+  #     dockerfile: ../JuntoSeguros.Onboarding.Command.API/Dockerfile
+  #   networks:
+  #       - js_env
+  
+  # onboarding.query.api:
+  #   image: onboarding-query-api
+  #   build:
+  #     context: .
+  #     dockerfile: ../JuntoSeguros.Onboarding.Query.API/Dockerfile
+  #   networks:
+  #       - js_env
   # filebeat:
   #   image: docker.elastic.co/beats/filebeat:8.14.0
   #   container_name: filebeat

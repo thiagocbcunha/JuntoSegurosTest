@@ -3,7 +3,7 @@ using JuntoSeguros.Domain.Exceptions;
 
 namespace JuntoSeguros.Domain.Entities.PersonAccessEntity;
 
-public class PersonAccess(string Email, PersonAccessEvent personAccessEvent) : Entity<Guid>
+public class PersonAccess(string Email, PersonAccessEvent personAccessEvent, bool IsNew = false) : Entity<Guid>
 {
     public Guid PersonId => Id;
     public bool Changed { get; private set; }
@@ -25,7 +25,7 @@ public class PersonAccess(string Email, PersonAccessEvent personAccessEvent) : E
         if (!PersonAccessEvent.Actived)
             throw new BusinessException("User not actived.");
 
-        if ((DateTime.Now - PersonAccessEvent.CreateDate).Days < 30)
+        if (!IsNew && (DateTime.Now - PersonAccessEvent.CreateDate).Days < 30)
             throw new BusinessException("User alredy chanded password before 30 days.");
 
         if (value == PersonAccessEvent.EncryptedPass)

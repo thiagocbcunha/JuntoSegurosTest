@@ -32,7 +32,13 @@ public abstract class BaseRepositoryTest
 
     public Person GetPerson(Gender gender)
     {
-        var person = _fixture.Create<Person>();
+        var person = new Person()
+        {
+            Name = _fixture.Create<string>(),
+            BirthDate = _fixture.Create<DateTime>(),
+            DocumentNumber = _fixture.Create<string>().Substring(0, 12)
+        };
+
         person.SetGender(gender);
 
         return person;

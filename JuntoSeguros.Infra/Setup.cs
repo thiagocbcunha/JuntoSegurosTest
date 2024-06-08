@@ -48,12 +48,14 @@ public static class Setup
                     c.Password(rabbitConfiguration.Password);
                 });
 
+                cfg.Durable = false;
+
                 cfg.ConfigureEndpoints(ctx);
 
                 Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
                     cfg.Message<PersonDto>(x => x.SetEntityName("JuntoSeguros.PersonDto.Event"));
-                    cfg.Message<PersonDto>(x => x.SetEntityName("JuntoSeguros.PersonAccessDto.Event"));
+                    cfg.Message<PersonAccessDto>(x => x.SetEntityName("JuntoSeguros.PersonAccessDto.Event"));
                 });
             });
         });

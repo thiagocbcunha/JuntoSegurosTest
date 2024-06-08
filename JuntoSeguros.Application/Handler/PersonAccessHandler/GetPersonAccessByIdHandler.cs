@@ -8,7 +8,7 @@ using JuntoSeguros.Application.Command.PersonAccessCommands;
 
 namespace JuntoSeguros.Application.Handler.PersonAccessHandlers;
 
-public class GetPersonAccessByIdHandler(ILogger<GetPersonAccessByIdCommand> _logger, IActivityFactory _activityFactory, IPersonAccessNSqlRepository _personRepository) 
+public class GetPersonAccessByIdHandler(ILogger<GetPersonAccessByIdHandler> _logger, IActivityFactory _activityFactory, IPersonAccessNSqlRepository _personRepository) 
     : IRequestHandler<GetPersonAccessByIdCommand, PersonAccessDto?>
 {
     public async Task<PersonAccessDto?> Handle(GetPersonAccessByIdCommand request, CancellationToken cancellationToken)

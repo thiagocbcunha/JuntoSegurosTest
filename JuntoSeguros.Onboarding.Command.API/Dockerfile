@@ -8,7 +8,7 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["JuntoSeguros.Onboarding.Command.Api/JuntoSeguros.Onboarding.Command.Api.csproj", "JuntoSeguros.Onboarding.Command.Api/"]
+COPY ["../JuntoSeguros.Onboarding.Command.Api/JuntoSeguros.Onboarding.Command.Api.csproj", "JuntoSeguros.Onboarding.Command.Api/"]
 RUN dotnet restore "./JuntoSeguros.Onboarding.Command.Api/./JuntoSeguros.Onboarding.Command.Api.csproj"
 COPY . .
 WORKDIR "/src/JuntoSeguros.Onboarding.Command.Api"

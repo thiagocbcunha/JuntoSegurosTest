@@ -1,29 +1,30 @@
 using Moq;
 using AutoFixture;
+using JuntoSeguros.Domain.Dtos;
 using Microsoft.Extensions.Logging;
+using JuntoSeguros.Domain.Contracts;
 using JuntoSeguros.Enterprise.Library.Contracts;
 using JuntoSeguros.Application.Handler.PersonHandlers;
 using JuntoSeguros.Domain.Entities.PersonAccessEntity;
 using JuntoSeguros.Application.Command.PersonAccessCommands;
-using JuntoSeguros.Domain.Dtos;
-using JuntoSeguros.Domain.Contracts;
 
-namespace JuntoSeguros.Application.Test.PersonHandlers;
+namespace JuntoSeguros.Application.Test.PersonAccessHandlers;
 
-public class NewUserHandlerTest
+public class CreatePersonAccessHandlerTest
 {
     Fixture _fixture = new();
     CreatePersonAccessHandler _handler;
 
-    Mock<ILogger<CreatePersonAccessHandler>> _loggerMock = new();
     Mock<IActivityFactory> _activityFactoryMock = new();
     Mock<IMessagingSender> _messagingSenderMock = new();
+    Mock<IEnterpriseSecurity> _enterpriseSecurityMock = new();
     Mock<IPersonAccessRepository> _personRepositoryMock = new();
+    Mock<ILogger<CreatePersonAccessHandler>> _loggerMock = new();
 
     [SetUp]
     public void Setup()
     {
-        _handler = new CreatePersonAccessHandler(_loggerMock.Object, _activityFactoryMock.Object, _personRepositoryMock.Object, _messagingSenderMock.Object);
+        _handler = new CreatePersonAccessHandler(_loggerMock.Object, _activityFactoryMock.Object, _enterpriseSecurityMock.Object, _personRepositoryMock.Object, _messagingSenderMock.Object);
         _personRepositoryMock.Setup(i => i.UpdateAsync(It.IsAny<PersonAccess>()));
     }
 
@@ -39,11 +40,11 @@ public class NewUserHandlerTest
     [Test]
     public async Task ShoudExecuteHandlerSuccessfully()
     {
-        var changeCommand = new CreatePersonAccessCommand(Guid.NewGuid(), _fixture.Create<string>(), _fixture.Create<string>(), DateTime.Now, true);
+        var changeCommand = new CreatePersonAccessCommand(Guid.NewGuid(), "teste@teste.com.br", "123456789", DateTime.Now, true);
         await _handler.Handle(changeCommand, new CancellationToken());
 
         _activityFactoryMock.Verify(m => m.Start("NewUser-Handler"), Times.Once);
-        _messagingSenderMock.Verify(m => m.Send(It.IsAny<PersonDto>()), Times.Once);
+        _messagingSenderMock.Verify(m => m.Send(It.IsAny<PersonAccessDto>()), Times.Once);
         _personRepositoryMock.Verify(m => m.AddAsync(It.IsAny<PersonAccess>()), Times.Once);
     }
 }

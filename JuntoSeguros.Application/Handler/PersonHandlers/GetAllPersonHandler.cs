@@ -11,8 +11,8 @@ public class GetAllPersonHandler(ILogger<GetAllPersonHandler> _logger, IActivity
 {
     public async Task<IEnumerable<PersonDto>> Handle(GetAllPersonCommand request, CancellationToken cancellationToken)
     {
-        _activityFactory.Start("GetAll-Handler");
-        _logger.LogInformation("GetAll Person");
+        _activityFactory.Start("GetAllPersons-Handler");
+        _logger.LogInformation("GetAllPersons Person");
 
         return await Task.FromResult(_personRepository.GetAll().ToList());
     }
