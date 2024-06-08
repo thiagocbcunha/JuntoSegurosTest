@@ -172,6 +172,18 @@ services:
     mem_limit: ${MEM_LIMIT}
     networks:
       - js_env
+
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - js_env
   # filebeat:
   #   image: docker.elastic.co/beats/filebeat:8.14.0
   #   container_name: filebeat

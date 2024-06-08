@@ -16,4 +16,8 @@
     <ProjectReference Include="..\JuntoSeguros.Core.Domain\JuntoSeguros.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RabbitMQ\" />
+  </ItemGroup>
+
 </Project>

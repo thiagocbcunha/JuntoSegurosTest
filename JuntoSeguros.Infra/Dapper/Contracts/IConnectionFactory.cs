@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace JuntoSeguros.Infra.Contracts;
+namespace JuntoSeguros.Infra.Dapper.Contracts;
 
 public interface IConnectionFactory
 {

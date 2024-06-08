@@ -1,4 +1,4 @@
-﻿namespace JuntoSeguros.Infra.Queries;
+﻿namespace JuntoSeguros.Infra.Dapper.Queries;
 
 internal class CommonQueries
 {

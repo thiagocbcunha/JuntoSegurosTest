@@ -21,4 +21,8 @@
     <PackageReference Include="SpecFlow" Version="3.9.74" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\JuntoSeguros.Application\JuntoSeguros.Application.csproj" />
+  </ItemGroup>
+
 </Project>

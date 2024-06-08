@@ -1,9 +1,9 @@
-﻿using JuntoSeguros.Infra.Contracts;
+﻿using JuntoSeguros.Infra.Dapper.Contracts;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace JuntoSeguros.Infra.Connection
+namespace JuntoSeguros.Infra.Dapper.Connection
 {
     public class DapperConnectionFactory(IConfiguration configuration) : IConnectionFactory
     {

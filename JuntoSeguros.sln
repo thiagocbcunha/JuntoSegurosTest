@@ -70,11 +70,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{8ED43B
 		Docker\OTELCollector\config\otel-collector.yml = Docker\OTELCollector\config\otel-collector.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Domain", "JuntoSeguros.Core.Domain\JuntoSeguros.Domain.csproj", "{3FFAA26B-1D3C-44B2-B62E-7C6C45D27099}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Domain", "JuntoSeguros.Core.Domain\JuntoSeguros.Domain.csproj", "{3FFAA26B-1D3C-44B2-B62E-7C6C45D27099}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{74492F5A-A3E5-46B9-B5C3-860862681A5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Application", "JuntoSeguros.Application\JuntoSeguros.Application.csproj", "{D8BA1B75-D554-4A85-B8B0-276D1D58C847}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Application", "JuntoSeguros.Application\JuntoSeguros.Application.csproj", "{D8BA1B75-D554-4A85-B8B0-276D1D58C847}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InternalAPI", "InternalAPI", "{BE74370A-35B7-4C30-89E6-244200E7C9B9}"
 EndProject
@@ -82,15 +82,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalAPI", "ExternalAPI"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{2CD23010-932B-4CAD-A867-5D4B6D6CEE05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Infra", "JuntoSeguros.Infra\JuntoSeguros.Infra.csproj", "{CB347D88-94C7-4341-AAFE-82C64E7764EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Infra", "JuntoSeguros.Infra\JuntoSeguros.Infra.csproj", "{CB347D88-94C7-4341-AAFE-82C64E7764EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Infra.IoC", "JuntoSeguros.Infra.IoC\JuntoSeguros.Infra.IoC.csproj", "{F9DC2511-BCEB-4329-955F-0FA85AEA284D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Infra.IoC", "JuntoSeguros.Infra.IoC\JuntoSeguros.Infra.IoC.csproj", "{F9DC2511-BCEB-4329-955F-0FA85AEA284D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{FF20FD11-75AE-4A62-965E-1B9C3A01B2FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Application.Test", "JuntoSeguros.Application.Test\JuntoSeguros.Application.Test.csproj", "{8B18B971-97DE-4C7F-931E-E93BE5E94967}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Application.Test", "JuntoSeguros.Application.Test\JuntoSeguros.Application.Test.csproj", "{8B18B971-97DE-4C7F-931E-E93BE5E94967}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Domain.Test", "JuntoSeguros.Domain.Test\JuntoSeguros.Domain.Test.csproj", "{7C64935D-798A-47DC-876E-9F4604D8D773}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Domain.Test", "JuntoSeguros.Domain.Test\JuntoSeguros.Domain.Test.csproj", "{7C64935D-798A-47DC-876E-9F4604D8D773}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLServer", "SQLServer", "{E39B5F08-260C-492E-A961-51450F42D97C}"
 	ProjectSection(SolutionItems) = preProject
@@ -129,9 +129,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{6F7778
 		Docker\Mongo\config\mongo.yml = Docker\Mongo\config\mongo.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Domain.Core", "JuntoSeguros.Domain.Core\JuntoSeguros.Domain.Core.csproj", "{4F05E5EB-9D3A-4035-99D3-1D1A04BC5E55}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuntoSeguros.Infra.Test", "JuntoSeguros.Infra.Test\JuntoSeguros.Infra.Test.csproj", "{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Infra.Test", "JuntoSeguros.Infra.Test\JuntoSeguros.Infra.Test.csproj", "{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -171,10 +169,6 @@ Global
 		{7C64935D-798A-47DC-876E-9F4604D8D773}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C64935D-798A-47DC-876E-9F4604D8D773}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C64935D-798A-47DC-876E-9F4604D8D773}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F05E5EB-9D3A-4035-99D3-1D1A04BC5E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F05E5EB-9D3A-4035-99D3-1D1A04BC5E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F05E5EB-9D3A-4035-99D3-1D1A04BC5E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F05E5EB-9D3A-4035-99D3-1D1A04BC5E55}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -210,7 +204,6 @@ Global
 		{6C5B6FD8-43E9-4018-B7AF-250DB1750ED5} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
 		{CD874E37-A4A4-4015-B371-9C32B292A06B} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
 		{6F777875-37B8-4C5E-BE13-A203369DEBE1} = {CD874E37-A4A4-4015-B371-9C32B292A06B}
-		{4F05E5EB-9D3A-4035-99D3-1D1A04BC5E55} = {74492F5A-A3E5-46B9-B5C3-860862681A5D}
 		{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB} = {FF20FD11-75AE-4A62-965E-1B9C3A01B2FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

@@ -1,10 +1,11 @@
 ﻿using Dapper;
 using System.Data;
-using JuntoSeguros.Infra.Contracts;
 using JuntoSeguros.Domain.Contracts;
 using JuntoSeguros.Domain.Entities.PersonAccessEntity;
+using JuntoSeguros.Infra.Dapper.Contracts;
+using JuntoSeguros.Domain.Entities.PersonEntity;
 
-namespace JuntoSeguros.Infra.Repositories;
+namespace JuntoSeguros.Infra.Dapper.Repositories;
 
 public class PersonAccessRepository(IConnectionFactory connectionFactory) : IPersonAccessRepository
 {
@@ -36,7 +37,7 @@ public class PersonAccessRepository(IConnectionFactory connectionFactory) : IPer
 
             if (row is not null)
             {
-                var result = new PersonAccess(row.UserName, row.Actived, row.EncryptedPass, row.CreateDate, false);
+                var result = new PersonAccess(row.UserName, new PersonAccessEvent(row.Actived, row.EncryptedPass, row.CreateDate));
                 result.SetId(id);
 
                 return result;
@@ -65,8 +66,8 @@ public class PersonAccessRepository(IConnectionFactory connectionFactory) : IPer
             var eventObject = new
             {
                 PersonId = entity.Id,
-                Actived = entity.Actived,
-                EncryptedPass = entity.EncryptedPass,
+                entity.PersonAccessEvent.Actived,
+                entity.PersonAccessEvent.EncryptedPass,
                 SysName = "JuntoSeguros.Onbording"
             };
 

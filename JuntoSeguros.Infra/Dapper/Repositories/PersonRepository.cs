@@ -1,10 +1,10 @@
 ﻿using Dapper;
 using System.Data;
-using JuntoSeguros.Infra.Contracts;
 using JuntoSeguros.Domain.Contracts;
 using JuntoSeguros.Domain.Entities.PersonEntity;
+using JuntoSeguros.Infra.Dapper.Contracts;
 
-namespace JuntoSeguros.Infra.Repositories;
+namespace JuntoSeguros.Infra.Dapper.Repositories;
 
 public class PersonRepository(IConnectionFactory connectionFactory) : IPersonRepository
 {

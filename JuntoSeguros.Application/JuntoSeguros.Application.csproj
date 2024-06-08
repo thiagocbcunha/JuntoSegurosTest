@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JuntoSeguros.Core.Domain\JuntoSeguros.Domain.csproj" />
+    <ProjectReference Include="..\JuntoSeguros.Enterprise.Library\JuntoSeguros.Enterprise.Library.csproj" />
+  </ItemGroup>
+
 </Project>

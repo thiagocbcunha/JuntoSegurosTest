@@ -2,9 +2,9 @@ using AutoFixture;
 using FluentAssertions;
 using JuntoSeguros.Domain.Contracts;
 using JuntoSeguros.Domain.Entities.PersonEntity;
-using JuntoSeguros.Infra.Connection;
-using JuntoSeguros.Infra.Contracts;
-using JuntoSeguros.Infra.Repositories;
+using JuntoSeguros.Infra.Dapper.Connection;
+using JuntoSeguros.Infra.Dapper.Contracts;
+using JuntoSeguros.Infra.Dapper.Repositories;
 using Microsoft.Extensions.Configuration;
 
 namespace JuntoSeguros.Infra.Test

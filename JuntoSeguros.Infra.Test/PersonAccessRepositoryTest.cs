@@ -3,9 +3,9 @@ using FluentAssertions;
 using JuntoSeguros.Domain.Contracts;
 using JuntoSeguros.Domain.Entities.PersonAccessEntity;
 using JuntoSeguros.Domain.Entities.PersonEntity;
-using JuntoSeguros.Infra.Connection;
-using JuntoSeguros.Infra.Contracts;
-using JuntoSeguros.Infra.Repositories;
+using JuntoSeguros.Infra.Dapper.Connection;
+using JuntoSeguros.Infra.Dapper.Contracts;
+using JuntoSeguros.Infra.Dapper.Repositories;
 using Microsoft.Extensions.Configuration;
 
 namespace JuntoSeguros.Infra.Test
@@ -41,7 +41,7 @@ namespace JuntoSeguros.Infra.Test
             person.SetGender(new Gender(1, "Feminino"));
             await _prepository.AddAsync(person);
 
-            var personAccess = new PersonAccess("TESTE", false, "123senha", DateTime.Now.AddDays(-50));
+            var personAccess = new PersonAccess("TESTE", new PersonAccessEvent(true, "123", DateTime.Now.AddDays(-50)));
             personAccess.SetId(person.Id);
             personAccess.Enable();
             personAccess.ChangePassword("senha123");
@@ -56,7 +56,7 @@ namespace JuntoSeguros.Infra.Test
             person.SetGender(new Gender(1, "Feminino"));
             await _prepository.AddAsync(person);
 
-            var personAccess = new PersonAccess("TESTE", false, "123senha", DateTime.Now.AddDays(-50));
+            var personAccess = new PersonAccess("TESTE", new PersonAccessEvent(true, "123", DateTime.Now.AddDays(-50)));
             personAccess.SetId(person.Id);
             personAccess.Enable();
             personAccess.ChangePassword("senha123");
@@ -73,7 +73,7 @@ namespace JuntoSeguros.Infra.Test
             person.SetGender(new Gender(1, "Feminino"));
             await _prepository.AddAsync(person);
 
-            var personAccess = new PersonAccess("TESTE", false, "123senha", DateTime.Now.AddDays(-50));
+            var personAccess = new PersonAccess("TESTE", new PersonAccessEvent(true, "123", DateTime.Now.AddDays(-50)));
             personAccess.SetId(person.Id);
             personAccess.Enable();
             personAccess.ChangePassword("senha123");
