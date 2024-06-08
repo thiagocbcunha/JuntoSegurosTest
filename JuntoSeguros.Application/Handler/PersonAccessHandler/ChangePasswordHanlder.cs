@@ -1,10 +1,11 @@
 ﻿using MediatR;
-using JuntoSeguros.Domain.Contracts;
 using Microsoft.Extensions.Logging;
 using JuntoSeguros.Enterprise.Library.Contracts;
 using JuntoSeguros.Domain.Entities.PersonAccessEntity;
 using JuntoSeguros.Application.Command.PersonAccessCommands;
 using JuntoSeguros.Domain.Exceptions;
+using JuntoSeguros.Domain.Dtos;
+using JuntoSeguros.Domain.Contracts;
 
 namespace JuntoSeguros.Application.Handler.PersonHandlers;
 
@@ -26,6 +27,6 @@ public class ChangePasswordHanlder(ILogger<ChangePasswordHanlder> _logger, IActi
         person.ChangePassword(newPass);
 
         await _personRepository.UpdateAsync(person);
-        await _messagingSender.Send(person);
+        await _messagingSender.Send((PersonAccessDto)person);
     }
 }

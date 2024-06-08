@@ -1,9 +1,10 @@
 ﻿using MediatR;
-using JuntoSeguros.Domain.Contracts;
 using Microsoft.Extensions.Logging;
 using JuntoSeguros.Enterprise.Library.Contracts;
 using JuntoSeguros.Domain.Entities.PersonAccessEntity;
 using JuntoSeguros.Application.Command.PersonAccessCommands;
+using JuntoSeguros.Domain.Dtos;
+using JuntoSeguros.Domain.Contracts;
 
 namespace JuntoSeguros.Application.Handler.PersonHandlers;
 
@@ -19,6 +20,6 @@ public class EnableUserHandler(ILogger<EnableUserHandler> _logger, IActivityFact
         person.Enable();
 
         await _personRepository.UpdateAsync(person);
-        await _messagingSender.Send(person);
+        await _messagingSender.Send((PersonAccessDto)person);
     }
 }

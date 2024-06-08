@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using JuntoSeguros.Enterprise.Library.Contracts;
 
-namespace JuntoSeguros.Onboarding.Controllers
+namespace JuntoSeguros.Onboarding.Query.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

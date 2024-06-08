@@ -8,5 +8,4 @@ public interface IRepository<TEntity, in TType>
     Task UpdateAsync(TEntity person);
     Task AddAsync(TEntity entity);
     Task<TEntity?> GetByIdAsync(TType id);
-
 }

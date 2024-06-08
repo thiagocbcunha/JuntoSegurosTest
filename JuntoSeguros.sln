@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Onboarding.Api", "JuntoSeguros\JuntoSeguros.Onboarding.Api.csproj", "{B52E8327-3100-41C7-B646-17B9683D3C2A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{6A87AC8B-73CF-4B11-813F-5CA077C38A33}"
 	ProjectSection(SolutionItems) = preProject
 		Docker\.env = Docker\.env
@@ -78,8 +76,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Application", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InternalAPI", "InternalAPI", "{BE74370A-35B7-4C30-89E6-244200E7C9B9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalAPI", "ExternalAPI", "{CCC3E262-AE8A-4254-9DCF-02A279E4B579}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{2CD23010-932B-4CAD-A867-5D4B6D6CEE05}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Infra", "JuntoSeguros.Infra\JuntoSeguros.Infra.csproj", "{CB347D88-94C7-4341-AAFE-82C64E7764EE}"
@@ -129,7 +125,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{6F7778
 		Docker\Mongo\config\mongo.yml = Docker\Mongo\config\mongo.yml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Infra.Test", "JuntoSeguros.Infra.Test\JuntoSeguros.Infra.Test.csproj", "{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Infra.IntegrationTest", "JuntoSeguros.Infra.Test\JuntoSeguros.Infra.IntegrationTest.csproj", "{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Onboarding.Command.Api", "JuntoSeguros.Onboarding.Command.API\JuntoSeguros.Onboarding.Command.Api.csproj", "{CA634357-A756-4716-B59D-4EB54C9579A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JuntoSeguros.Onboarding.Query.Api", "JuntoSeguros.Onboarding.Query.API\JuntoSeguros.Onboarding.Query.Api.csproj", "{C6F69617-CDC7-415E-9AD0-B37E74C81DFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,10 +137,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B52E8327-3100-41C7-B646-17B9683D3C2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B52E8327-3100-41C7-B646-17B9683D3C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B52E8327-3100-41C7-B646-17B9683D3C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B52E8327-3100-41C7-B646-17B9683D3C2A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76F6EADE-82B2-44F4-98FC-F64979CBE249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76F6EADE-82B2-44F4-98FC-F64979CBE249}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76F6EADE-82B2-44F4-98FC-F64979CBE249}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -173,12 +169,19 @@ Global
 		{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA634357-A756-4716-B59D-4EB54C9579A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA634357-A756-4716-B59D-4EB54C9579A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA634357-A756-4716-B59D-4EB54C9579A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA634357-A756-4716-B59D-4EB54C9579A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6F69617-CDC7-415E-9AD0-B37E74C81DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6F69617-CDC7-415E-9AD0-B37E74C81DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6F69617-CDC7-415E-9AD0-B37E74C81DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6F69617-CDC7-415E-9AD0-B37E74C81DFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B52E8327-3100-41C7-B646-17B9683D3C2A} = {BE74370A-35B7-4C30-89E6-244200E7C9B9}
 		{DDC8AAC4-1A48-4749-9D03-64FEE0B95688} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
 		{434EA7FD-BC21-41CD-8998-97912645C366} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
 		{38DF522C-3405-44F4-816C-9A7B94A6AA4A} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
@@ -205,6 +208,8 @@ Global
 		{CD874E37-A4A4-4015-B371-9C32B292A06B} = {6A87AC8B-73CF-4B11-813F-5CA077C38A33}
 		{6F777875-37B8-4C5E-BE13-A203369DEBE1} = {CD874E37-A4A4-4015-B371-9C32B292A06B}
 		{CAA2AC07-47F6-467E-B8D4-1C137C0F0AEB} = {FF20FD11-75AE-4A62-965E-1B9C3A01B2FB}
+		{CA634357-A756-4716-B59D-4EB54C9579A7} = {BE74370A-35B7-4C30-89E6-244200E7C9B9}
+		{C6F69617-CDC7-415E-9AD0-B37E74C81DFA} = {BE74370A-35B7-4C30-89E6-244200E7C9B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0447C4E-0E7F-41B7-8C09-939E97EDC0C4}

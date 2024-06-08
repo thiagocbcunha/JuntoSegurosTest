@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JuntoSeguros.Application\JuntoSeguros.Application.csproj" />
+    <ProjectReference Include="..\JuntoSeguros.Core.Domain\JuntoSeguros.Domain.csproj" />
     <ProjectReference Include="..\JuntoSeguros.Infra\JuntoSeguros.Infra.csproj" />
   </ItemGroup>
   

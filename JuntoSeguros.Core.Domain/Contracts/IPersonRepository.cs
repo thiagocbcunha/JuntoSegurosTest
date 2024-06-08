@@ -2,6 +2,6 @@
 
 namespace JuntoSeguros.Domain.Contracts;
 
-public interface IPersonRepository: IRepository<Person, Guid>
+public interface IPersonRepository : IRepository<Person, Guid>
 {
 }

@@ -1,6 +1,6 @@
-﻿using JuntoSeguros.Domain.Enums;
+﻿using MediatR;
+using JuntoSeguros.Domain.Enums;
 using JuntoSeguros.Domain.Entities.PersonEntity;
-using MediatR;
 
 namespace JuntoSeguros.Application.Command.PersonCommands;
 
