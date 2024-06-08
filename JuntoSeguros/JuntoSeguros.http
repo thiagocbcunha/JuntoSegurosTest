@@ -1,6 +1,0 @@
-@JuntoSeguros_HostAddress = http://localhost:5275
-
-GET {{JuntoSeguros_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
