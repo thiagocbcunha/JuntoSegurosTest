@@ -13,17 +13,17 @@ namespace JuntoSeguros.Application.Test.PersonHandlers;
 public class EnableUserHandlerTest
 {
     Fixture _fixture = new();
-    EnableUserHandler _handler;
+    EnablePersonAccessHandler _handler;
 
     Mock<IActivityFactory> _activityFactoryMock = new();
     Mock<IMessagingSender> _messagingSenderMock = new();
-    Mock<ILogger<EnableUserHandler>> _loggerMock = new();
+    Mock<ILogger<EnablePersonAccessHandler>> _loggerMock = new();
     Mock<IPersonAccessRepository> _personRepositoryMock = new();
 
     [SetUp]
     public void Setup()
     {
-        _handler = new EnableUserHandler(_loggerMock.Object, _activityFactoryMock.Object, _personRepositoryMock.Object, _messagingSenderMock.Object);
+        _handler = new EnablePersonAccessHandler(_loggerMock.Object, _activityFactoryMock.Object, _personRepositoryMock.Object, _messagingSenderMock.Object);
         _personRepositoryMock.Setup(i => i.UpdateAsync(It.IsAny<PersonAccess>()));
     }
 
@@ -39,7 +39,7 @@ public class EnableUserHandlerTest
     [Test]
     public async Task ShoudExecuteHandlerSuccessfully()
     {
-        var changeCommand = new EnableUserCommand(Guid.NewGuid(), _fixture.Create<string>(), _fixture.Create<string>(), DateTime.Now, true);
+        var changeCommand = new EnablePersonAccessCommand(Guid.NewGuid(), _fixture.Create<string>(), _fixture.Create<string>(), DateTime.Now, true);
         await _handler.Handle(changeCommand, new CancellationToken());
 
         _activityFactoryMock.Verify(m => m.Start("EnableUser-Handler"), Times.Once);

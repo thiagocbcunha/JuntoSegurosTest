@@ -8,11 +8,13 @@ using JuntoSeguros.Application.Command.PersonCommands;
 using JuntoSeguros.Application.Handler.PersonHandlers;
 using JuntoSeguros.Domain.Dtos;
 using JuntoSeguros.Domain.Contracts;
+using AutoFixture;
 
 namespace JuntoSeguros.Application.Test.PersonHandlers;
 
 public class InsertPersonHandlerTest
 {
+    Fixture _fixture = new();
     Mock<IActivityFactory> _activityFactoryMock = new();
     Mock<IMessagingSender> _messagingSenderMock = new();
     Mock<IPersonRepository> _personRepositoryMock = new();
@@ -35,7 +37,7 @@ public class InsertPersonHandlerTest
     [Test]
     public async Task ShoudExecuteHandlerSuccessfully()
     {
-        var insertCommand = new CreatePersonCommand("Teste Handler", DateTime.Now, GenderEnum.Female);
+        var insertCommand = new CreatePersonCommand(_fixture.Create<string>(), _fixture.Create<string>(), DateTime.Now, GenderEnum.Female);
         _personRepositoryMock.Setup(i => i.AddAsync(It.IsAny<Person>()));
 
         var handler = new CreatePersonHandler(_loggerMock.Object, _activityFactoryMock.Object, _personRepositoryMock.Object, _messagingSenderMock.Object);

@@ -1,11 +1,11 @@
 ﻿using MediatR;
+using JuntoSeguros.Domain.Dtos;
 using Microsoft.Extensions.Logging;
+using JuntoSeguros.Domain.Contracts;
+using JuntoSeguros.Domain.Exceptions;
 using JuntoSeguros.Enterprise.Library.Contracts;
 using JuntoSeguros.Domain.Entities.PersonAccessEntity;
 using JuntoSeguros.Application.Command.PersonAccessCommands;
-using JuntoSeguros.Domain.Exceptions;
-using JuntoSeguros.Domain.Dtos;
-using JuntoSeguros.Domain.Contracts;
 
 namespace JuntoSeguros.Application.Handler.PersonHandlers;
 

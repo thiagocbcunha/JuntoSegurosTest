@@ -2,6 +2,6 @@
 
 namespace JuntoSeguros.Application.Command.PersonCommands;
 
-public class CreatePersonCommand(string name, DateTime birthDate, GenderEnum gender) : BaseCommand(name, birthDate, gender)
+public class CreatePersonCommand(string name, string document, DateTime birthDate, GenderEnum gender) : BaseCommand(name, document, birthDate, gender)
 {
 }

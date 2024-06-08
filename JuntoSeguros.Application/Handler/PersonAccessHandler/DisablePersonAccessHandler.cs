@@ -8,9 +8,10 @@ using JuntoSeguros.Domain.Contracts;
 
 namespace JuntoSeguros.Application.Handler.PersonHandlers;
 
-public class DisableUserHandler(ILogger<DisableUserHandler> _logger, IActivityFactory _activityFactory, IPersonAccessRepository _personRepository, IMessagingSender _messagingSender) : IRequestHandler<DisableUserCommand>
+public class DisablePersonAccessHandler(ILogger<DisablePersonAccessHandler> _logger, IActivityFactory _activityFactory, IPersonAccessRepository _personRepository, IMessagingSender _messagingSender) 
+    : IRequestHandler<DisablePersonAccessCommand>
 {
-    public async Task Handle(DisableUserCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DisablePersonAccessCommand request, CancellationToken cancellationToken)
     {
         _activityFactory.Start("DisableUser-Handler");
 

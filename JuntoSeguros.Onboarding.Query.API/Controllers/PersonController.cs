@@ -23,7 +23,9 @@ namespace JuntoSeguros.Onboarding.Query.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<PersonDto?> Get(Guid id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType<PersonDto>(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Get(Guid id)
         {
             var activity = activityFactory.Start($"GetById");
             activity.Tag?.SetTag("MathodName", "Get");
@@ -32,11 +34,13 @@ namespace JuntoSeguros.Onboarding.Query.API.Controllers
 
             var result = await mediator.Send(new GetPersonByIdCommand(id));
 
-            return result;
+            return result is null ? NotFound() : Ok(result);
         }
 
         [HttpGet("/document/{document}")]
-        public async Task<PersonDto?> Get(string document)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType<PersonDto>(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Get(string document)
         {
             var activity = activityFactory.Start($"GetByDocument");
             activity.Tag?.SetTag("MathodName", "Get");
@@ -45,7 +49,7 @@ namespace JuntoSeguros.Onboarding.Query.API.Controllers
 
             var result = await mediator.Send(new GetPersonByDocumentCommand(document));
 
-            return result;
+            return result is null ? NotFound() : Ok(result);
         }
     }
 }

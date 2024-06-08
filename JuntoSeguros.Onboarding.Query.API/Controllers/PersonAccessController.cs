@@ -15,7 +15,7 @@ namespace JuntoSeguros.Onboarding.Query.API.Controllers
         {
             var activity = activityFactory.Start($"GetAll");
             activity.Tag?.SetTag("MathodName", "Get");
-            logger.LogInformation(message: $"Executing: PersonAccess method:GetAll"); ;
+            logger.LogInformation(message: $"Executing: PersonAccess method:GetAll");
 
             var result = await mediator.Send(new GetAllPersonAccessCommand());
 
@@ -23,7 +23,9 @@ namespace JuntoSeguros.Onboarding.Query.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<PersonAccessDto?> Get(Guid id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType<PersonAccessDto>(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Get(Guid id)
         {
             var activity = activityFactory.Start($"GetById");
             activity.Tag?.SetTag("MathodName", "Get");
@@ -32,11 +34,13 @@ namespace JuntoSeguros.Onboarding.Query.API.Controllers
 
             var result = await mediator.Send(new GetPersonAccessByIdCommand(id));
 
-            return result;
+            return result is null ? NotFound() : Ok(result);
         }
 
         [HttpGet("/email/{email}")]
-        public async Task<PersonAccessDto?> Get(string email)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType<PersonAccessDto>(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Get(string email)
         {
             var activity = activityFactory.Start($"GetByEmail");
             activity.Tag?.SetTag("MathodName", "Get");
@@ -45,7 +49,7 @@ namespace JuntoSeguros.Onboarding.Query.API.Controllers
 
             var result = await mediator.Send(new GetPersonAccessByEmailCommand(email));
 
-            return result;
+            return result is null ? NotFound() : Ok(result);
         }
     }
 }

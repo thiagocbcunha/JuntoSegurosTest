@@ -3,7 +3,8 @@ using JuntoSeguros.Domain.Entities.PersonEntity;
 
 namespace JuntoSeguros.Application.Command.PersonCommands;
 
-public class ChangeGenderPersonCommand(Guid id, string name, DateTime birthDate, GenderEnum gender) : BaseCommand(name, birthDate, gender)
+public class ChangeGenderPersonCommand(Guid id, string name, string document, DateTime birthDate, GenderEnum gender) 
+    : BaseCommand(name, document, birthDate, gender)
 {
     public Guid Id { get; } = id;
 

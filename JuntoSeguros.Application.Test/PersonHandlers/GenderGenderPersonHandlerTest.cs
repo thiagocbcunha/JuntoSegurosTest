@@ -15,7 +15,7 @@ namespace JuntoSeguros.Application.Test;
 public class GenderGenderPersonHandlerTest
 {
     Fixture _fixture = new();
-    GenderGenderPersonHandler _handler;
+    ChangeGenderPersonHandler _handler;
     Mock<IActivityFactory> _activityFactoryMock = new();
     Mock<IMessagingSender> _messagingSenderMock = new();
     Mock<IPersonRepository> _personRepositoryMock = new();
@@ -24,7 +24,7 @@ public class GenderGenderPersonHandlerTest
     [SetUp]
     public void Setup()
     {
-        _handler = new GenderGenderPersonHandler(_loggerMock.Object, _activityFactoryMock.Object, _personRepositoryMock.Object, _messagingSenderMock.Object);
+        _handler = new ChangeGenderPersonHandler(_loggerMock.Object, _activityFactoryMock.Object, _personRepositoryMock.Object, _messagingSenderMock.Object);
         _personRepositoryMock.Setup(i => i.UpdateAsync(It.IsAny<Person>()));
     }
 
@@ -40,7 +40,7 @@ public class GenderGenderPersonHandlerTest
     [Test]
     public async Task ShoudExecuteHandlerSuccessfully()
     {
-        var changeCommand = new ChangeGenderPersonCommand(Guid.NewGuid(), "Teste Handler", DateTime.Now, GenderEnum.Female);
+        var changeCommand = new ChangeGenderPersonCommand(Guid.NewGuid(), _fixture.Create<string>(), _fixture.Create<string>(), DateTime.Now, GenderEnum.Female);
         await _handler.Handle(changeCommand, new CancellationToken());
 
         _messagingSenderMock.Verify(m => m.Send(It.IsAny<PersonDto>()), Times.Once);

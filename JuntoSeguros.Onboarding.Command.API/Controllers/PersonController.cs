@@ -9,21 +9,26 @@ namespace JuntoSeguros.Onboarding.Command.API.Controllers
     [Route("[controller]")]
     public class PersonController(ILogger<PersonController> logger, IMediator mediator, IActivityFactory activityFactory) : ControllerBase
     {
-        [HttpPost(Name = "Create")]
-        public async Task<IActionResult> Post(CreatePersonCommand personCommand)
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody]CreatePersonCommand personCommand)
         {
-            var activity = activityFactory.Start("Post-Create");
-
-            activity.Tag?.SetTag("Create", "Executing");
-
-            logger.LogInformation(message: "Executing Create");
+            var activity = activityFactory.Start($"Create-Person");
+            activity.Tag?.SetTag("MathodName", "Post");
+            logger.LogInformation(message: $"Executing: Person method:Post");
 
             await mediator.Send(personCommand);
 
-            logger.LogInformation(message: "Create Executed");
+            return StatusCode(200);
+        }
 
-            if (activity is not null)
-                activity.Dispose();
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromBody] ChangeGenderPersonCommand personCommand)
+        {
+            var activity = activityFactory.Start($"Change-Person");
+            activity.Tag?.SetTag("MathodName", "Put");
+            logger.LogInformation(message: $"Executing: Person method:Put");
+
+            await mediator.Send(personCommand);
 
             return StatusCode(200);
         }

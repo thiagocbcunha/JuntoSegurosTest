@@ -9,7 +9,7 @@ using JuntoSeguros.Domain.Contracts;
 
 namespace JuntoSeguros.Application.Handler.PersonHandlers;
 
-public class GenderGenderPersonHandler(ILogger<CreatePersonHandler> _logger, IActivityFactory _activityFactory, IPersonRepository _personRepository, IMessagingSender _messagingSender) : IRequestHandler<ChangeGenderPersonCommand>
+public class ChangeGenderPersonHandler(ILogger<CreatePersonHandler> _logger, IActivityFactory _activityFactory, IPersonRepository _personRepository, IMessagingSender _messagingSender) : IRequestHandler<ChangeGenderPersonCommand>
 {
     public async Task Handle(ChangeGenderPersonCommand request, CancellationToken cancellationToken)
     {
@@ -18,19 +18,9 @@ public class GenderGenderPersonHandler(ILogger<CreatePersonHandler> _logger, IAc
 
         var person = (Person)request;
 
-        person.SetGender(GetGender(request.Gender));
+        person.SetGender(request.Gender.GetGender());
 
         await _personRepository.UpdateAsync(person);
         await _messagingSender.Send((PersonDto)person);
-    }
-
-    private Gender GetGender(GenderEnum gender)
-    {
-        return gender switch
-        {
-            GenderEnum.Female => new Gender((int)gender, "Feminino"),
-            GenderEnum.Male => new Gender((int)gender, "Masculino"),
-            _ => new Gender((int)gender, "Outros")
-        };
     }
 }

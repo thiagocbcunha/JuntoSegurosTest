@@ -13,17 +13,17 @@ namespace JuntoSeguros.Application.Test.PersonHandlers;
 public class DisableUserHandlerTest
 {
     Fixture _fixture = new();
-    DisableUserHandler _handler;
+    DisablePersonAccessHandler _handler;
 
     Mock<IActivityFactory> _activityFactoryMock = new();
     Mock<IMessagingSender> _messagingSenderMock = new();
-    Mock<ILogger<DisableUserHandler>> _loggerMock = new();
+    Mock<ILogger<DisablePersonAccessHandler>> _loggerMock = new();
     Mock<IPersonAccessRepository> _personRepositoryMock = new();
 
     [SetUp]
     public void Setup()
     {
-        _handler = new DisableUserHandler(_loggerMock.Object, _activityFactoryMock.Object, _personRepositoryMock.Object, _messagingSenderMock.Object);
+        _handler = new DisablePersonAccessHandler(_loggerMock.Object, _activityFactoryMock.Object, _personRepositoryMock.Object, _messagingSenderMock.Object);
         _personRepositoryMock.Setup(i => i.UpdateAsync(It.IsAny<PersonAccess>()));
     }
 
@@ -39,7 +39,7 @@ public class DisableUserHandlerTest
     [Test]
     public async Task ShoudExecuteHandlerSuccessfully()
     {
-        var changeCommand = new DisableUserCommand(Guid.NewGuid(), _fixture.Create<string>(), _fixture.Create<string>(), DateTime.Now, true);
+        var changeCommand = new DisablePersonAccessCommand(Guid.NewGuid(), _fixture.Create<string>(), _fixture.Create<string>(), DateTime.Now, true);
         await _handler.Handle(changeCommand, new CancellationToken());
 
         _activityFactoryMock.Verify(m => m.Start("DisableUser-Handler"), Times.Once);
