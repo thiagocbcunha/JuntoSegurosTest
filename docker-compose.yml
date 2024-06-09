@@ -2,14 +2,14 @@ name: "juntoseguros"
 services:
   elasticsearch:
     build:
-      context: Elastic/
+      context: Docker/Elastic/
       args:
         ELK_VERSION: $ELK_VERSION
     image: elasticsearch
     container_name: elasticsearch
     volumes:
       - type: bind
-        source: ./Elastic/config/elasticsearch.yml
+        source: ./Docker/Elastic/config/elasticsearch.yml
         target: /usr/share/Elastic/config/elasticsearch.yml
         read_only: true
       - type: volume
@@ -30,14 +30,14 @@ services:
 
   kibana:
     build:
-      context: Kibana/
+      context: Docker/Kibana/
       args:
         ELK_VERSION: $ELK_VERSION
     image: kibana
     container_name: kibana
     volumes:
       - type: bind
-        source: ./Kibana/config/kibana.yml
+        source: ./Docker/Kibana/config/kibana.yml
         target: /usr/share/Kibana/config/kibana.yml
         read_only: true
     environment:
@@ -54,18 +54,18 @@ services:
 
   logstash:
     build:
-      context: Logstash/
+      context: Docker/Logstash/
       args:
         ELK_VERSION: $ELK_VERSION
     image: logstash
     container_name: logstash
     volumes:
       - type: bind
-        source: ./Logstash/config/logstash.yml
+        source: ./Docker/Logstash/config/logstash.yml
         target: /usr/share/Logstash/config/logstash.yml
         read_only: true
       - type: bind
-        source: ./Logstash/pipeline
+        source: ./Docker/Logstash/pipeline
         target: /usr/share/Logstash/pipeline
         read_only: true
     command: logstash -f /usr/share/Logstash/pipeline/logstash.conf  
@@ -82,7 +82,7 @@ services:
 
   jaeger:
     build:
-      context: Jaeger/
+      context: Docker/Jaeger/
     image: jaeger-tracing
     container_name: jaeger
     ports:
@@ -92,12 +92,12 @@ services:
 
   otelcollector:
     build:
-      context: OTELCollector/
+      context: Docker/OTELCollector/
     image: otel-collector
     container_name: otelcollector
     volumes:
       - type: bind
-        source: ./OTELCollector/config/otel-collector.yml
+        source: ./Docker/OTELCollector/config/otel-collector.yml
         target: /usr/share/OTELCollector/config/otel-collector.yml
         read_only: true
     command: [ "--config=/usr/share/OTELCollector/config/otel-collector.yml" ]
@@ -120,9 +120,9 @@ services:
     ports: 
       - "${SQLSERVER_PORT}:1433"
     volumes:
-      - ./SQLServer/log:/var/opt/mssql/log
-      - ./SQLServer/data:/var/opt/mssql/data
-      - ./SQLServer/secrets:/var/opt/mssql/secrets
+      - ./DockerAppFiles/SQLServer/log:/var/opt/mssql/log
+      - ./DockerAppFiles/SQLServer/data:/var/opt/mssql/data
+      - ./DockerAppFiles/SQLServer/secrets:/var/opt/mssql/secrets
     networks:
       - js_env
   
@@ -132,33 +132,33 @@ services:
     depends_on:
       - mssqlserver
     volumes:
-      - ./MSTools/init/JuntoSegurosOnboarding_Creation.sql:/tmp/JuntoSegurosOnboarding_Creation.sql
-      - ./MSTools/init/JuntoSegurosOnboarding_Insertions.sql:/tmp/JuntoSegurosOnboarding_Insertions.sql
-      - ./MSTools/init/init-juntoseguros_onboarding.sh:/tmp/init-juntoseguros_onboarding.sh
+      - ./Docker/MSTools/init/JuntoSegurosOnboarding_Creation.sql:/tmp/JuntoSegurosOnboarding_Creation.sql
+      - ./Docker/MSTools/init/JuntoSegurosOnboarding_Insertions.sql:/tmp/JuntoSegurosOnboarding_Insertions.sql
+      - ./Docker/MSTools/init/init-juntoseguros_onboarding.sh:/tmp/init-juntoseguros_onboarding.sh
     command: /bin/bash ./tmp/init-juntoseguros_onboarding.sh
     networks:
       - js_env
   
-  redis:
-    build:
-      context: Redis/
-    image: redis
-    container_name: redis
-    command: redis-server --requirepass ${REDIS_PASSWORD}
-    ports:
-      - "${REDIS_PORT}:6379"
-    mem_limit: ${MEM_LIMIT}
-    networks:
-      - js_env
+  # redis:
+  #   build:
+  #     context: Docker/Redis/
+  #   image: redis
+  #   container_name: redis
+  #   command: redis-server --requirepass ${REDIS_PASSWORD}
+  #   ports:
+  #     - "${REDIS_PORT}:6379"
+  #   mem_limit: ${MEM_LIMIT}
+  #   networks:
+  #     - js_env
 
   mongo:
     build:
-      context: Mongo/
+      context: Docker/Mongo/
     image: mongo
     container_name: mongo
     volumes:
       - type: bind
-        source: ./Mongo/config/mongo.yml
+        source: ./Docker/Mongo/config/mongo.yml
         target: /usr/share/Mongo/config/mongo.yml
         read_only: true
       - type: volume
@@ -180,40 +180,40 @@ services:
         - 5672:5672
         - 15672:15672
     volumes:
-        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+        - ./DockerAppFiles/RabbitMQ/data/:/var/lib/rabbitmq/
+        - ./DockerAppFiles/RabbitMQ/log/:/var/log/rabbitmq
     networks:
         - js_env
-
-  # rabbitmq:
-  #   build:
-  #     context: RabbitMQ/
-  #   image: rabbitmq
-  #   container_name: 'rabbitmq'
-  #   ports:
-  #       - ${RABBIT_PORT_1}:5672
-  #       - ${RABBIT_PORT_2}:15672
-  #   volumes:
-  #       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-  #       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
-  #   networks:
-  #       - js_env
   
-  # onboarding.command.api:
-  #   image: onboarding-command-api
-  #   build:
-  #     context: .
-  #     dockerfile: ../JuntoSeguros.Onboarding.Command.API/Dockerfile
-  #   networks:
-  #       - js_env
+  onboarding.command.api:
+    image: onboarding-command-api
+    build:
+      context: .
+      dockerfile: src/JuntoSeguros.Onboarding.Command.API/Dockerfile
+    environment:
+      "ASPNETCORE_HTTP_PORTS": "8080"
+      "ASPNETCORE_ENVIRONMENT": "Docker"
+    ports:
+       - 32804:8080
+    depends_on:
+       - rabbitmq
+    networks:
+       - js_env
   
-  # onboarding.query.api:
-  #   image: onboarding-query-api
-  #   build:
-  #     context: .
-  #     dockerfile: ../JuntoSeguros.Onboarding.Query.API/Dockerfile
-  #   networks:
-  #       - js_env
+  onboarding.query.api:
+    image: onboarding-query-api
+    build:
+      context: .
+      dockerfile: ./src/JuntoSeguros.Onboarding.Query.API/Dockerfile
+    environment:
+      "ASPNETCORE_HTTP_PORTS": "8080"
+      "ASPNETCORE_ENVIRONMENT": "Docker"
+    ports:
+       - 32805:8080
+    depends_on:
+       - rabbitmq
+    networks:
+       - js_env
   # filebeat:
   #   image: docker.elastic.co/beats/filebeat:8.14.0
   #   container_name: filebeat

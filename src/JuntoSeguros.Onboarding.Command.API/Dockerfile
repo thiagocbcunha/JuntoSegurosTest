@@ -6,16 +6,16 @@ WORKDIR /app
 EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
+ARG BUILD_CONFIGURATION=Docker
 WORKDIR /src
-COPY ["../JuntoSeguros.Onboarding.Command.Api/JuntoSeguros.Onboarding.Command.Api.csproj", "JuntoSeguros.Onboarding.Command.Api/"]
-RUN dotnet restore "./JuntoSeguros.Onboarding.Command.Api/./JuntoSeguros.Onboarding.Command.Api.csproj"
+COPY ["src/JuntoSeguros.Onboarding.Command.API/JuntoSeguros.Onboarding.Command.Api.csproj", "src/JuntoSeguros.Onboarding.Command.API/"]
+RUN dotnet restore "./src/JuntoSeguros.Onboarding.Command.API/JuntoSeguros.Onboarding.Command.Api.csproj"
 COPY . .
-WORKDIR "/src/JuntoSeguros.Onboarding.Command.Api"
+WORKDIR "/src/src/JuntoSeguros.Onboarding.Command.API"
 RUN dotnet build "./JuntoSeguros.Onboarding.Command.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
+ARG BUILD_CONFIGURATION=Docker
 RUN dotnet publish "./JuntoSeguros.Onboarding.Command.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 

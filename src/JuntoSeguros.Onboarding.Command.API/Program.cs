@@ -32,6 +32,7 @@ if (app.Environment.IsDevelopment() || environmentName.Equals("docker", StringCo
     app.UseSwaggerUI();
 }
 
+
 app.UseMiddleware<HandlerBusinessExpetions>();
 
 app.UseAuthorization();

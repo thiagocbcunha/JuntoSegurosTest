@@ -16,5 +16,5 @@ VALUES
 	('Pessoal', NULL, 1, 'Initial Data', GETDATE())
 GO
 
-INSERT INTO[dbo].[Person] ([Id], [Name], [BirthDate]) OUTPUT INSERTED.Id VALUES ('BDC873D7-DC10-4CCD-937D-68BBF9BF4861', 'INITIAL TESTE', '1988-09-11')
+INSERT INTO[dbo].[Person] ([Id], [Name],[DocumentNumber], [BirthDate]) OUTPUT INSERTED.Id VALUES ('BDC873D7-DC10-4CCD-937D-68BBF9BF4861', 'INITIAL TESTE', '00000000000', '1988-09-11')
 INSERT INTO [dbo].[PersonEvent] ([PersonId] ,[VersionNum] ,[GenderId], [CreateBy], [CreateDate]) VALUES ('BDC873D7-DC10-4CCD-937D-68BBF9BF4861', 1, 1, 'INITIAL TESTE', getdate())
