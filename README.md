@@ -5,10 +5,10 @@ Esse projeto é uma aplicação de teste. De cadastro de pessoa e acesso deste.
 
 ## DDD
 
-Esse projeto foi concebido sob a abordagem do que prega o DDD Domain-Driven Design. Houveram duas complexidades: técnica e a de negócio. Pessoa(Person) como domínio principal e Acesso(PersonAcesso) como domínio auxiliar.
+Esse projeto foi concebido sob a abordagem do que prega o **Domain-Driven Design (DDD)**. Houve duas complexidades: técnica e de negócio. **Pessoa(Person)** como domínio principal e **Acesso** (ou **PersonAccess**) como domínio auxiliar.
 
 ## Arquitetura
-Pensando em escalabilidade, performance e segurança focando em normativas do BACEN, foi elaborada uma arquitetura baseada em micro serviços, com aplicação de Event-Driven e Event-Source. Se observarmos as tabelas do banco, para toda alteração há uma evento aplicado a este e com uma nova versão atribuída a mudança. Para ter maior performance, já que o banco de dados carrega uma complexidade alta, foi adotada um desenho CQRC - Command Query Responsability Segregation, pelo nome, já sabemos que a intenção é o desenvolvimento de api para consulta e outra para alteração de dados diretamente no banco, visando minimizar a concorrência de leitura e escrita na mesma base.
+Eu concebi este projeto com foco em escalabilidade, performance e segurança, alinhado às normativas do BACEN. Optei por uma arquitetura baseada em micro serviços, aplicando os conceitos de **Event-Driven** e **Event-Source**. Ao observar as tabelas do banco, será notado que para toda alteração há um evento aplicado a este, e cada mudança recebe uma nova versão, nesse ponto seguimos o conceito de **Event-Source**. Para cada alteração eventos são disparados para a quem interessar e é observado a aplicação de **Event-Driven**. Para otimizar a performance, especialmente considerando a complexidade do banco de dados, adotei o padrão **CQRS (Command Query Responsibility Segregation)**. Esse padrão consiste em separar as operações de leitura (queries) das operações de escrita (commands). Por meio do CQRS, desenvolvi APIs distintas: uma para consulta com o nome de **JuntoSeguros.Onboarding.Query.Api** e outra para alteração com o nome **JuntoSeguros.Onboarding.Command.Api**. Seguindo essa arquitetura, minha intenção foi minimizar a concorrência entre leitura e escrita na mesma base. Os componentes utilados para antender a demanda desses padrão, são:
 
 ## Banco de Dados
 * Sql Server
@@ -23,39 +23,46 @@ Pensando em escalabilidade, performance e segurança focando em normativas do BA
     * senha:guest
 
 ## Observabilidade
-Nesse projeto aplicamos logs e telemetria com:
+A observabilidade em aplicações refere-se à capacidade de compreender e monitorar efetivamente o comportamento interno e o desempenho de um sistema em tempo real. Para tal adaptei o código para atender a esses conceitos e utilizei de algumas ferramentas, sendo:
 * Kibana
     * Visualização dos logs
 * Jaeger
     * Telemetria
 
 ## Premissas
-O projeto foi desenvolvido com aquilo que prega o bom desenvolvimento de software. Houve uma preocupação, não somente com arquitetura da solução, mas também a de software. Observando código, podemos ver uma separação em camadas, onde a domain só é acessada via porta, e quem quer acessar ou fornecer algo que sirva de apoio as regras, deverá se adaptar as portas. O que foi mencionado é a arquitetura hexagonal. Foi aplicado os princípios do SOLID. Além, claro, de uma alta cobertura de teste unitários, e um pequeno teste de integração para validar os repositórios nas operações com banco de dados.
+Seguindo os princípios do bom desenvolvimento de software, construí este projeto com ênfase na arquitetura da solução e da aplicação. A análise do código revela uma separação em camadas bem definida, onde a camada de domínio, responsável pelas regras de negócio, é acessada exclusivamente por meio de interfaces bem definidas, chamadas de portas e o componente que apoia a lógica de negócio se adapta a essas portas. Essa abordagem, conhecida como **arquitetura hexagonal**, promove a independência da lógica de negócio em relação às tecnologias e frameworks utilizados, facilitando testes, manutenabilidade e reuso de código.  
+Além da arquitetura hexagonal, o projeto também incorpora os princípios SOLID, um conjunto de boas práticas que garantem a coesão, baixo acoplamento. Essa combinação resulta em um código mais robusto, flexível e fácil de entender.  
+Para garantir a qualidade do código, realizei testes unitários com alta cobertura, verificando o funcionamento individual de cada componente. Além disso, um teste de integração foi realizado para validar a interação entre os repositórios e as operações com o banco de dados.
 
 ## Considerações
-Para apresentar esse projetos, houve pouco tempo, com isso não organizei algumas coisas que vejo como necessárias, tais: cada serviço deveria está numa solution, coisas comuns, deveria está num gerenciador de pacotes interno "da empresa", nesse caso subir uma imagem do nuget no Docker para essa finalidade. Com isso, não ficou, do meu ponto de vista, com um nível bom de organização.
-Outro ponto é que a aplicação está orientada a event-driven, ou seja cada alteração gerará um novo estado que seré persistido em base de dados (event-sourcing), esse alteração gerará eventos, e pontando terá subscribes, no nosso caso consumers. No desenvolvimento desses consumers não foi adicionada resiliência de negócia, ou seja se ocorrer um erro, não há regras de retentativas. Desse modo, como a intenção é atualizar uma base nosql, então na ocorrência do erro, esse dado, atualizado, não estará disponível nas consultas das query-apis. Lembrete caso seja visto.
+Para apresentar esse projeto, tive pouco tempo e, por isso, não organizei algumas coisas que considero necessárias. Por exemplo, cada serviço deveria estar em uma solution separada. Além disso, as partes comuns deveriam estar em um gerenciador de pacotes interno da empresa. Nesse caso, seria interessante subir uma imagem do NuGet no Docker para essa finalidade. Infelizmente, do meu ponto de vista, a organização não atingiu um nível satisfatório.  
+Outro ponto importante é que não foi adicionada resiliência de negócio. Isso significa que, se ocorrer um erro, não há regras de retentativa. Como a intenção é atualizar uma base NoSQL, na ocorrência de um erro, os dados atualizados não estarão disponíveis nas consultas das query APIs. Fica o lembrete para futuras análises.
 #### Nesse projeto, por conta do tempo, não foram adicionado:
-* Worker em .net core para funcionar como consumer 
-* API Service para fonercer serviços de altenticação de usuário
+* Desenvolvimento de Benchmark testes para emular testes de carga.
+* Integração com Grafana para obteção de métricas e contrução de alertas e notificações.
+* Worker em .net core para funcionar como consumer e empacotamento de evento para auto descritivos.
 * BFF em NodeJs que validaria a autenticação do usuário para realizar a orquestração da Command e Query API.
+* API Service para fonercer serviços de altenticação de usuário. Esse serviço iria fazer uso do Redis para controle de cache distribuído.
 
 ## Conteinerização
-A forma como a aplicação foi desenvolvida permite a orquestração de container, por exemplo, com Kubernets. Foi tentado emular essa situação com docker-compose.
+A aplicação foi projetada com orquestração de containers em mente, facilitando a implantação e o gerenciamento em ambientes escaláveis. A viabilidade de orquestração foi validada por meio de testes com o Docker Compose, demonstrando potencial para utilização em produção com ferramentas como o Kubernetes.
+
+## Bugs
+A aplicação está com erro nos endpoits de alteração de PersonAccess. Vale essa consideração levando o tempo que tive para o desenvolvimento dela.
 
 ## Inicialização do Projeto
-Na raiz do projeto, assim que feito o pull request, acesse do diretório Docker, abra o terminal e execute o comando abaixo.
+Na raiz do projeto, assim que feito o pull request, abra o terminal e execute o comando abaixo.
 ```bash
 docker-compose up -d
 ```
 
-Depois de subir o container é necessário validar alguns logs dos containers, sendo:
-* Para garantir que o SqlServer esteja iniciado e com o banco de dados JuntoSegurosOnboarding, verifique no container **mssqltools** os seguintes logs:
+Depois de subir o container é necessário validar alguns logs, sendo:
+* Para garantir que o SqlServer esteja iniciado e com o banco de dados **JuntoSegurosOnboarding**, verifique no container **mssqltools** os seguintes logs:
 ![mssqltools](img/database_alredy.png)
 
 * Acessando o banco de dados via Manangement Studio teremos as seguintes relações de tabelas:
 ![mssqltools](img/tables_database.png)
-Caso o banco não existe, há duas formas de criar, ou colocando o container **mssqltools** para iniciar novamente, até que ele termine o processo, ou abrir o diretório *Docker\MSTools\init\\* e executar no Management Studio:
+Caso o banco não existe, há duas formas de criar, ou iniciando o container **mssqltools** novamente, até que ele termine o processo, ou abrir o diretório *Docker\MSTools\init\\* e executar no Management Studio as queries e na ordem que aqui aparecem, sendo:
     * JuntoSegurosOnboarding_Creation.sql
     * JuntoSegurosOnboarding_Insertions.sql
 
