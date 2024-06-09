@@ -21,25 +21,40 @@ public class HandlerBusinessExpetions
         {
             await _next(context);
         }
-        catch (BusinessException ex)
+        catch (Exception ex)
         {
             await HandleExceptionAsync(context, ex);
         }
     }
 
-    private async Task HandleExceptionAsync(HttpContext context, BusinessException exception)
+    private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         _logger.LogError(exception, "An business exception occurred.");
 
-        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-        context.Response.ContentType = "application/json";
+        List<string> errors = new List<string>();
+        HttpStatusCode statusCode;
 
-        var errorResponse = new
+        if (exception is ValidationException appException)
         {
-            exception.Message,
-            context.Response.StatusCode,
+            errors.AddRange(appException.Errors);
+            statusCode = HttpStatusCode.BadRequest;
+        }
+        else
+        {
+            errors.Add(exception.Message);
+            statusCode = HttpStatusCode.InternalServerError;
+            if (exception is BusinessException)
+                statusCode = HttpStatusCode.BadRequest;
+        }
+
+        var response = new
+        {
+            errors = errors,
+            status = statusCode
         };
 
-        await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = (int)statusCode;
+        await context.Response.WriteAsync(JsonSerializer.Serialize(response));
     }
 }

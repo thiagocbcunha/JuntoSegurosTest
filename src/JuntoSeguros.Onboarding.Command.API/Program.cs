@@ -1,8 +1,10 @@
+using FluentValidation;
 using JuntoSeguros.Infra.IoC;
 using JuntoSeguros.Enterprise.Library.Security;
 using JuntoSeguros.Onboarding.Command.Api.Middware;
 using JuntoSeguros.Enterprise.Library.Logging.Extensions;
 using JuntoSeguros.Enterprise.Library.Tracing.Extensions;
+using JuntoSeguros.Application.Command.PersonCommands;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddEnterpriseSecurity();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddValidatorsFromAssembly(typeof(CreatePersonCommand).Assembly);
 builder.Logging.ConfigureEnterpriceLog(builder.Configuration, "ApplicationName");
 
 var enterpriseTracingBuilder = builder.Services.CreateEnterpriseTracingBuilder(builder.Configuration);

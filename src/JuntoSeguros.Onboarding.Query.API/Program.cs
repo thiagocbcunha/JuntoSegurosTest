@@ -1,6 +1,5 @@
 using JuntoSeguros.Infra.IoC;
 using JuntoSeguros.Enterprise.Library.Security;
-using JuntoSeguros.Onboarding.Query.Api.Middware;
 using JuntoSeguros.Enterprise.Library.Logging.Extensions;
 using JuntoSeguros.Enterprise.Library.Tracing.Extensions;
 
@@ -32,8 +31,6 @@ if (app.Environment.IsDevelopment() || environmentName.Equals("docker", StringCo
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseMiddleware<HandlerBusinessExpetions>();
 
 app.UseAuthorization();
 app.MapControllers();
