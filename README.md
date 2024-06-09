@@ -68,3 +68,10 @@ Caso o banco não existe, há duas formas de criar, ou iniciando o container **m
 * É necessario que o RabbitMQ estaja iniciado e plugado as aplicações, para isso devermos verificar no container **rabbitmq** os seguintes logs:
 ![mssqltools](img/connection_rabbit_ok.png)
 
+## Acesso
+Por fim, acesso o swagger das aplicações, nos endereços:
+* http://localhost:32804/swagger/index.html
+   * JuntoSeguros.Onboarding.Command.Api
+* http://localhost:32805/swagger/index.html
+   * JuntoSeguros.Onboarding.Query.Api
+
