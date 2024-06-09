@@ -1,7 +1,7 @@
 # JuntoSeguros
 # Intenção
 
-Esse projeto é uma aplicação de teste. De cadastro de pessoa e acesso deste.
+Etse projeto é uma aplicação de teste com a finalidade de criar um CRUD de pessoa e acesso deste.
 
 ## DDD
 
