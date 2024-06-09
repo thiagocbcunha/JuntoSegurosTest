@@ -1,14 +1,14 @@
 # JuntoSeguros
 # Intenção
 
-Etse projeto é uma aplicação de teste com a finalidade de criar um CRUD de pessoa e acesso deste.
+Este projeto é uma aplicação de teste com a finalidade de criar um CRUD de pessoa e acesso deste.
 
 ## DDD
 
-Esse projeto foi concebido sob a abordagem do que prega o **Domain-Driven Design (DDD)**. Houve duas complexidades: técnica e de negócio. **Pessoa(Person)** como domínio principal e **Acesso** (ou **PersonAccess**) como domínio auxiliar.
+Foi concebido sob a abordagem do que prega o **Domain-Driven Design (DDD)**. Houve duas complexidades: técnica e de negócio. **Pessoa(Person)** como domínio principal e **Acesso** (ou **PersonAccess**) como domínio auxiliar.
 
 ## Arquitetura
-Eu concebi este projeto com foco em escalabilidade, performance e segurança, alinhado às normativas do BACEN. Optei por uma arquitetura baseada em micro serviços, aplicando os conceitos de **Event-Driven** e **Event-Source**. Ao observar as tabelas do banco, será notado que para toda alteração há um evento aplicado a este, e cada mudança recebe uma nova versão, nesse ponto seguimos o conceito de **Event-Source**. Para cada alteração eventos são disparados para a quem interessar e é observado a aplicação de **Event-Driven**. Para otimizar a performance, especialmente considerando a complexidade do banco de dados, adotei o padrão **CQRS (Command Query Responsibility Segregation)**. Esse padrão consiste em separar as operações de leitura (queries) das operações de escrita (commands). Por meio do CQRS, desenvolvi APIs distintas: uma para consulta com o nome de **JuntoSeguros.Onboarding.Query.Api** e outra para alteração com o nome **JuntoSeguros.Onboarding.Command.Api**. Seguindo essa arquitetura, minha intenção foi minimizar a concorrência entre leitura e escrita na mesma base. Os componentes utilados para antender a demanda desses padrão, são:
+Eu concebi este projeto com foco em escalabilidade, performance e segurança, alinhado às normativas do BACEN. Optei por uma arquitetura baseada em micro serviços, aplicando os conceitos de **Event-Driven** e **Event-Source**. Ao observar as tabelas do banco, será notado que para toda alteração há um evento aplicado a este, e cada mudança recebe uma nova versão, nesse ponto seguimos o conceito de **Event-Source**. Eventos são disparados a cada alteração a quem interessar e nesse ponto é observado a aplicação de **Event-Driven**. Para otimizar a performance, especialmente considerando a complexidade do banco de dados, adotei o padrão **CQRS (Command Query Responsibility Segregation)**. Esse padrão consiste em separar as operações de leitura (queries) das operações de escrita (commands). Por meio do CQRS, desenvolvi APIs distintas: uma para consulta com o nome de **JuntoSeguros.Onboarding.Query.Api** e outra para alteração com o nome **JuntoSeguros.Onboarding.Command.Api**. Seguindo essa arquitetura, minha intenção foi minimizar a concorrência entre leitura e escrita na mesma base. Os componentes utilados para antenderem a demanda desses padrões, são:
 
 ## Banco de Dados
 * Sql Server
@@ -30,9 +30,8 @@ A observabilidade em aplicações refere-se à capacidade de compreender e monit
     * Telemetria
 
 ## Premissas
-Seguindo os princípios do bom desenvolvimento de software, construí este projeto com ênfase na arquitetura da solução e da aplicação. A análise do código revela uma separação em camadas bem definida, onde a camada de domínio, responsável pelas regras de negócio, é acessada exclusivamente por meio de interfaces bem definidas, chamadas de portas e o componente que apoia a lógica de negócio se adapta a essas portas. Essa abordagem, conhecida como **arquitetura hexagonal**, promove a independência da lógica de negócio em relação às tecnologias e frameworks utilizados, facilitando testes, manutenabilidade e reuso de código.  
-Além da arquitetura hexagonal, o projeto também incorpora os princípios SOLID, um conjunto de boas práticas que garantem a coesão, baixo acoplamento. Essa combinação resulta em um código mais robusto, flexível e fácil de entender.  
-Para garantir a qualidade do código, realizei testes unitários com alta cobertura, verificando o funcionamento individual de cada componente. Além disso, um teste de integração foi realizado para validar a interação entre os repositórios e as operações com o banco de dados.
+Seguindo os princípios do bom desenvolvimento de software, construí este projeto com ênfase na arquitetura da solução e da aplicação. A análise do código revela uma separação em camadas bem definida, onde a camada de domínio, responsável pelas regras de negócio, é acessada exclusivamente por meio de interfaces bem definidas, chamadas de portas e o componente que apoia a lógica de negócio se adapta a essas portas. Essa abordagem, conhecida como **arquitetura hexagonal**, promove a independência da lógica de negócio em relação às tecnologias e frameworks utilizados, facilitando testes, manutenabilidade e reuso de código. O projeto também incorpora os princípios SOLID, um conjunto de boas práticas que garantem a coesão e baixo acoplamento. Essa combinação resulta em um código mais robusto, flexível e fácil de entender. 
+Para garantir a qualidade do código segui conceitos do Clen Code e realizei testes unitários com alta cobertura, verificando o funcionamento individual de cada componente. Além disso, um teste de integração foi realizado para validar a interação entre os repositórios e as operações com o banco de dados.
 
 ## Considerações
 Para apresentar esse projeto, tive pouco tempo e, por isso, não organizei algumas coisas que considero necessárias. Por exemplo, cada serviço deveria estar em uma solution separada. Além disso, as partes comuns deveriam estar em um gerenciador de pacotes interno da empresa. Nesse caso, seria interessante subir uma imagem do NuGet no Docker para essa finalidade. Infelizmente, do meu ponto de vista, a organização não atingiu um nível satisfatório.  
