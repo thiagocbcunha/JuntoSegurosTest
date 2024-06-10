@@ -27,6 +27,7 @@ Eu concebi este projeto com foco em escalabilidade, performance e segurança, al
 A observabilidade em aplicações refere-se à capacidade de compreender e monitorar efetivamente o comportamento interno e o desempenho de um sistema em tempo real. Para tal adaptei o código para atender a esses conceitos e utilizei de algumas ferramentas, sendo:
 * Kibana
     * Visualização dos logs
+    * Ao executar pela primeira vez, por mais que existam dados de log, a visualização destes só será possivel por meio de index. Então ao ir em discover do Kibana, haverá um redirecionamento para a tela de criação.  O nome do index é **junto_seguros**, crie e assim a visualição do logs acontecerá.
     * http://localhost:5601/app/home#/
 * Jaeger
     * Telemetria
