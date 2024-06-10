@@ -66,6 +66,6 @@ public abstract class MongoRepository<TItemCollection> : MongoViewRepository<TIt
 
     public void Update(TItemCollection register)
     {
-        _collection.ReplaceOneAsync(b => b.Id == register.Id, register);
+        _collection.ReplaceOne(b => b.Id == register.Id, register, new ReplaceOptions { IsUpsert = true });
     }
 }

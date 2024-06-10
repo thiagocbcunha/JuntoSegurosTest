@@ -1,6 +1,6 @@
-﻿using JuntoSeguros.Domain.Contracts;
+﻿using MassTransit;
 using JuntoSeguros.Domain.Dtos;
-using MassTransit;
+using JuntoSeguros.Domain.Contracts;
 
 namespace JuntoSeguros.Application.Consumers;
 
@@ -8,7 +8,7 @@ public class PersonConsumer(IPersonNSqlRepository _personNSqlRepository) : ICons
 {
     public async Task Consume(ConsumeContext<PersonDto> context)
     {
-        _personNSqlRepository.Insert(context.Message);
+        _personNSqlRepository.Update(context.Message);
         await Task.CompletedTask;
     }
 }

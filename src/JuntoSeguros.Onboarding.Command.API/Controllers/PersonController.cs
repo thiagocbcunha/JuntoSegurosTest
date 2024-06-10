@@ -21,7 +21,7 @@ namespace JuntoSeguros.Onboarding.Command.API.Controllers
             return StatusCode(200);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Put([FromBody] ChangeGenderPersonCommand personCommand)
         {
             var activity = activityFactory.Start($"Change-Person");

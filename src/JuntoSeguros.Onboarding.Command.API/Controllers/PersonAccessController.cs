@@ -21,7 +21,7 @@ namespace JuntoSeguros.Onboarding.Command.API.Controllers
             return StatusCode(200);
         }
 
-        [HttpPut("change/password/{id}")]
+        [HttpPut("change/password/")]
         public async Task<IActionResult> Put([FromBody] ChangePasswordCommand personCommand)
         {
             var activity = activityFactory.Start($"ChangePassword-PersonAccess");
@@ -33,7 +33,7 @@ namespace JuntoSeguros.Onboarding.Command.API.Controllers
             return StatusCode(200);
         }
 
-        [HttpPut("change/enable/{id}")]
+        [HttpPut("change/enable/")]
         public async Task<IActionResult> Put([FromBody] EnablePersonAccessCommand personCommand)
         {
             var activity = activityFactory.Start($"Enable-PersonAccess");
@@ -45,7 +45,7 @@ namespace JuntoSeguros.Onboarding.Command.API.Controllers
             return StatusCode(200);
         }
 
-        [HttpPut("change/disable/{id}")]
+        [HttpPut("change/disable/")]
         public async Task<IActionResult> Put([FromBody] DisablePersonAccessCommand personCommand)
         {
             var activity = activityFactory.Start($"Disable-PersonAccess");
